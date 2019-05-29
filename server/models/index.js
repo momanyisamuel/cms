@@ -18,7 +18,10 @@ if (process.env.HEROKU_URL){
     })
 }
 else{
-    sequelize = new Sequelize('app', 'root', 'password');
+    sequelize = new Sequelize('test', 'postgres', '',{
+      host: 'localhost',
+      dialect: 'postgres'
+    });
 }
  
 fs.readdirSync(__dirname)

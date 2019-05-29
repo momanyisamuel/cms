@@ -2,7 +2,12 @@ var db = require('../models');
 
 exports.create = function (req, res, callback){
     db.User.create({
-        username: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        nationalId: req.body.nationalId,
+        email: req.body.email,
+        userStatus: req.body.userStatus,
         password: req.body.password
     })
     .success(function (user){
@@ -22,7 +27,7 @@ exports.create = function (req, res, callback){
 exports.read = function (req, res, callback){
     db.User.find({
         where: {
-            username: req.param('username')
+            id: req.params.id
         }
     })
     .success(function (user){
@@ -64,7 +69,7 @@ exports.readAll = function (req, res, callback){
 exports.update = function (req, res, data, callback){
     db.User.find({
         where: {
-            username: req.param('username')
+            id: req.params.id
         }
     })
     .success(function (user){
@@ -97,7 +102,7 @@ exports.update = function (req, res, data, callback){
 exports.delete = function (req, res){
     db.User.find({
         where: {
-            username: req.param('username')
+            id: req.params.id
         }
     })
     .success(function (user){

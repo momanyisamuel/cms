@@ -1,1 +1,10 @@
 exports.userService = require('./userService');
+exports.chamaService = require('./chamaService');
+exports.contributionService = require('./contributionsService');
+exports.withdrawalService = require('./withdrawalsService');
+exports.groupaccountService = require('./groupaccountsService');
+exports.fineService = require('./finesService'); 
+exports.goalService = require('./goalService');
+exports.voteService = require('./votesService');
+exports.portfolioService = require('./portfolioService');
+exports.loanService = require('./loansService'); 

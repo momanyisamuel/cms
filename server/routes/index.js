@@ -1,2 +1,11 @@
 exports.user = require('./user');
+exports.chama = require('./chama');
+exports.contribution = require('./contributions');
+exports.fine = require('./fines');
+exports.goal = require('./goal');
+exports.groupaccount = require('./groupaccounts');
+exports.loan = require('./loans');
+exports.portfolio = require('./portfolio');
+exports.vote = require('./votes');
+exports.withdrawal = require('./withdrawals');
 exports.socket = require('./socket');

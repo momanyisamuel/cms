@@ -11,7 +11,6 @@
         "express": "3.4.7",
         "logfmt": "*",
         "ejs": "*",
-        "pg": "*",
         "mysql": "*",
         "sequelize": "2.0.0-dev11",
         "lodash": "*",
@@ -19,5 +18,9 @@
         "mocha": "*",
         "expect.js": "*",
         "socket.io": "*"
+    },
+    "devDependencies": {
+        "pg": "^6.4.2",
+        "pg-hstore": "^2.3.2"
     }
 }
