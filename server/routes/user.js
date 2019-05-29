@@ -1,5 +1,7 @@
 var db = require('../models'),
 userService =  require('../services/userService');
+var jwt = require('jsonwebtoken')
+var config = require('../../config/config')
 
 exports.create = function (req, res){
     if(!req.body.hasOwnProperty('firstName') || !req.body.hasOwnProperty('password')){
@@ -33,3 +35,14 @@ exports.update = function (req, res){
 exports.delete = function (req, res){
     userService.delete(req, res);
 };
+exports.findByEmail = function (req, res) {
+    userService.validPassword( req, res, function(user) {
+        if(!user) { 
+            res.send( 500, { error : 'Wrong Email or password'} )
+        } else {
+            
+            res.send(200, user)
+           
+        }
+    });
+}

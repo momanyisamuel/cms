@@ -1,4 +1,5 @@
 var db = require('../models');
+var bcrypt = require('bcrypt')
 
 exports.create = function (req, res, callback){
     db.User.create({
@@ -127,3 +128,45 @@ exports.delete = function (req, res){
         res.send(500, {error: 'error: userService.delete'});
     })
 };
+
+exports.findById = function(id, cb) {
+    db.User.findById(id,cb)
+}
+exports.findByEmail= function(req, res, callback) {
+    db.User.find({
+        where:{ email : req.body.email }
+    })
+    .success(function (user){
+        if (callback){
+            callback(user)
+        }
+        else {
+          res.send(200, user);  
+        }
+    })
+    .error(function (err){
+        console.log('error: userService.readAll');
+        res.send(500, {error: 'error: userService.readAll'});
+    })
+}
+exports.validPassword = function(req, res, callback) {
+    db.User.find({
+        where:{ email : req.body.email, password: req.body.password }
+    })
+    .success(function (user){
+        if (callback){
+            callback(user)
+        }
+        else {
+        res.send(200, user);  
+        }
+    })
+    .error(function (err){
+        console.log('error: userService.readAll');
+        res.send(500, {error: 'error: userService.readAll'});
+    })
+    // return  bcrypt.compare(password, this.password, function(err, isMatch){
+    //     if(err) throw err;
+    //     cb(null, isMatch)
+    // });
+}

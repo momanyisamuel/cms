@@ -6,6 +6,7 @@ logfmt = require('logfmt'),
 app = express(),
 io = require('socket.io'),
 socket = require('./server/routes/socket');
+var passport = require('passport');
 
 app.configure(function(){
     app.set('port', process.env.PORT || 8000);
@@ -21,13 +22,17 @@ app.configure(function(){
     app.use(express.session({ secret: 'secret' }));
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'client')));
+    // app.use(passport.initialize());
+    // app.use(passport.session());
 })
+
+// require('./config/passport')(passport)
 
 if (app.get('env') === 'development') {
     app.use(express.errorHandler({ showStack: true, dumpExceptions: true}));
 }
 
-require('./routes')(app);
+require('./routes')(app, passport);
 
 db.sequelize
 .sync({ force: true})

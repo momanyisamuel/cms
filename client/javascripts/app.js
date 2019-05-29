@@ -5,8 +5,13 @@ angular.module('app', ['app.controllers', 'ngRoute'])
     $routeProvider
     .when('/', {
         templateUrl: '/views/partials/home.html',
-        controller: 'HomeCtrl'
+        controller: 'HomeCtrl'})
+    .otherwise({
+        redirectTo: '/'
     })
+    .when('/register', {
+        templateUrl: '/views/partials/register.html',
+        controller: 'registerCtrl'})
     .otherwise({
         redirectTo: '/'
     });
