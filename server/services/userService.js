@@ -151,7 +151,7 @@ exports.findByEmail= function(req, res, callback) {
 }
 exports.validPassword = function(req, res, callback) {
     db.User.find({
-        where:{ email : req.body.email, password: req.body.password }
+        where:{ email : req.query.email, password: req.query.password }
     })
     .success(function (user){
         if (callback){

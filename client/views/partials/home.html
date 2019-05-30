@@ -1,57 +1,56 @@
+<div class="main-section">           
+    <div class="sidebar">
+        <ul class="sidebar-menu">
+            <div>
+                <li><a href="#"><span style="font-weight: bold">Dashboard</span></a></li>
+                <li><a href="#">No groups</a></li>
+                <li><a href="group.html">Group Name</a></li>
+            </div>
+            <!-- display if user is in a group  -->
+            <li><a href="deposits.html">Deposits</a></li>
+            <li><a href="withdrawals.html">Withdrawals</a></li>
+            <li><a href="loans.html">Loans</a></li>
+            <li><a href="members.html">Members</a></li>
+            <li><a href="fines.html">Fines</a></li>
+            <li><a href="#">Votes</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Reports</a></li>
+        </ul>
 
-<div class="main-content">
-    <div class="data-section">
-        <!-- notification -->
-        <div class="message-card">
-            <h4> This is a message <span><i class="fas fa-plus"></i></span></h4>
+        <div class="sidebar-user">
+            <p><i class="far fa-user-circle"></i> John Doe</p>
         </div>
-
-        <div class="row">
-            <div class="row-column">
-                <h4>risk apetite</h4>
-            </div>
-            <div class="row-column">
-                <h4>fines incured </h4>
-            </div>
-            <div class="row-column">
-                <h4>goal summary</h4>
-            </div>
-            <div class="row-column">
-                <h4>total contributions</h4>
-            </div>
+    </div>
+    <div class="inner-section">
+        <div class="top-bar">
+            
         </div>
         
-        <!-- polls -->
-        <div class="user-details">
-            <form name="userForm" ng-submit="submitUserForm()">
-                <div class="form-group">
-                    <label for="firstname">FirstName:</label>
-                    <input ng-model="firstName" type="text" class="form-control" id="firstName" placeholder="Enter FirstName"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">LastName:</label>
-                    <input ng-model="lastName" type="text" class="form-control" id="lastName" placeholder="Enter LastName"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Email:</label>
-                    <input ng-model="email" type="text" class="form-control" id="email" placeholder="Enter LastName"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Phone Number:</label>
-                    <input ng-model="phoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="Enter phoneNumber"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">national Id</label>
-                    <input ng-model="nationalId" type="text" class="form-control" id="nationalId" placeholder="Enter national id"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Password:</label>
-                    <input ng-model="password" type="password" class="form-control" id="password" placeholder="Enter LastName"/>
+        <div class="main-content">
+            <div class="data-section">
+                <!-- notification -->
+                <div class="message-card">
+                    <h4> This is a message <span><i class="fas fa-plus"></i></span></h4>
                 </div>
 
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+                <div class="row">
+                    <div class="row-column">
+                        <h4>risk apetite</h4>
+                    </div>
+                    <div class="row-column">
+                        <h4>fines incured </h4>
+                    </div>
+                    <div class="row-column">
+                        <h4>goal summary</h4>
+                    </div>
+                    <div class="row-column">
+                        <h4>total contributions</h4>
+                    </div>
+                </div>
+                
+                <!-- polls -->
+
+            </div>
         </div>
-
     </div>
 </div>

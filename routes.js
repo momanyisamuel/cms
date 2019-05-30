@@ -5,7 +5,7 @@ exports = module.exports = function (app, passport){
         res.render('index');
     });
     
-    app.get('/login', routes.user.findByEmail)
+    app.get('/api/login', routes.user.findByEmail)
     //users
     app.get('/api/user', routes.user.readAll);
     app.post('/api/user', routes.user.create);

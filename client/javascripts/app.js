@@ -14,6 +14,12 @@ angular.module('app', ['app.controllers', 'ngRoute'])
         controller: 'registerCtrl'})
     .otherwise({
         redirectTo: '/'
+    })
+    .when('/login', {
+        templateUrl: '/views/partials/login.html',
+        controller: 'loginCtrl'})
+    .otherwise({
+        redirectTo: '/'
     });
 })
 .run(function (){

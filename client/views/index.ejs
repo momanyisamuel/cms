@@ -3,7 +3,6 @@
   <head>
     <title>My Chama</title>
     <!-- stylesheets -->
-    <link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' />
     <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet"> 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel='stylesheet' href='stylesheets/reset.css' />
@@ -15,48 +14,24 @@
     
   </style>
   <body>
-      <div class="wrapper">
-          <div class="sidebar">
-              <a href="#" class="sidebar-logo">MyChama</a>
-              
-              <ul class="sidebar-menu">
-                  <div>
-                      <li><a href="#"><span style="font-weight: bold">Dashboard</span></a></li>
-                      <li><a href="#">No groups</a></li>
-                      <li><a href="group.html">Group Name</a></li>
-      
-                  </div>
-                  <!-- display if user is in a group  -->
-                  <li><a href="deposits.html">Deposits</a></li>
-                  <li><a href="withdrawals.html">Withdrawals</a></li>
-                  <li><a href="loans.html">Loans</a></li>
-                  <li><a href="members.html">Members</a></li>
-                  <li><a href="fines.html">Fines</a></li>
-                  <li><a href="#">Votes</a></li>
-                  <li><a href="#">Portfolio</a></li>
-                  <li><a href="#">Reports</a></li>
-              </ul>
-      
-              <div class="sidebar-user">
-                  <p><i class="far fa-user-circle"></i> John Doe</p>
-              </div>
-          </div>
-          <div class="main-section">
-              <div class="top-bar">
-                  <div class="top-bar--title">
-                      <h3>Dashboard</h3>
-                  </div>
-                  <ul class="top-bar--nav">
-                      <li><a href="addinvoice.html"><i class="fas fa-plus"></i> Start a Group</a></li>
-                      <li><a href="#" class="black">Sign out</a></li>
-                  </ul>
-              </div>
-              <ng-view></ng-view>
-              
-          </div>
-      </div>
-    
-    
+     
+    <div class="wrapper">
+        <div class="top-navbar">
+            <div class="logo">
+                <a href="#">Logo</a>
+            </div>
+            <div class="menu">
+                <ul class="top-bar--nav">
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <ng-view></ng-view>
+        
+        
+    </div>      
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js"></script>
