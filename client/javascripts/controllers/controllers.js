@@ -10,22 +10,25 @@ angular.module('app.controllers', ['socketService'])
     
 }])
 
-// .controller('registerCtrl',['$scope','$http',function($scope, $http){
-//     $scope.submitUserForm = function(){
-//         var url = 'http://localhost:8000/api/user/'
-//         $http.post(url, {
-//             firstName: $scope.firstName,
-//             lastName: $scope.lastName,
-//             phoneNumber: $scope.phoneNumber,
-//             nationalId: $scope.nationalId,
-//             email: $scope.userStatus,
-//             password: $scope.password
-//         },
-//         {
-//           headers: { 'Content-Type': 'application/json; charset=UTF-8'}
-//         }).then(function(response){ console.log(response)}).catch(err => console.log(err))
-//     }
-// }])
+.controller('registerCtrl',['$scope','$http','$location',function($scope, $http, $location){
+    $scope.submitUserForm = function(){
+        var url = 'http://localhost:8000/api/user/'
+        $http.post(url, {
+            firstName: $scope.firstName,
+            lastName: $scope.lastName,
+            phoneNumber: $scope.phoneNumber,
+            nationalId: $scope.nationalId,
+            email: $scope.email,
+            password: $scope.password
+        },
+        {
+          headers: { 'Content-Type': 'application/json; charset=UTF-8'}
+        }).then(function(response) { 
+            console.log(response) 
+            $location.path('/login')
+        }).catch(err => console.log(err))
+    }
+}])
 
 .controller('loginCtrl',['$scope','$http','$location',function($scope, $http, $location){
     var currentUser = []
