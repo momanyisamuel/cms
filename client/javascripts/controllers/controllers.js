@@ -10,6 +10,7 @@ angular.module('app.controllers', ['socketService'])
     
 }])
 
+
 .controller('registerCtrl',['$scope','$http','$location',function($scope, $http, $location){
     $scope.submitUserForm = function(){
         var url = 'http://localhost:8000/api/user/'
@@ -55,4 +56,60 @@ angular.module('app.controllers', ['socketService'])
         return localStorage.setItem('currentUser', null)
     }
 
+}])
+
+.controller('depositsCtrl', ['$scope', '$http', function ($scope, $http){
+
+    
+    $scope.welcome = 'Welcome to the deposits page';
+    
+}])
+
+.controller('withdrawalsCtrl', ['$scope', '$http', function ($scope, $http){
+
+    
+    $scope.welcome = 'Welcome to the withdrawals page';
+    
+}])
+
+.controller('finesCtrl', ['$scope', '$http', function ($scope, $http){
+
+    
+    $scope.welcome = 'Welcome to the fines page';
+    
+}])
+
+.controller('loansCtrl', ['$scope', '$http', function ($scope, $http){
+
+    
+    $scope.welcome = 'Welcome to the LOANS page';
+    
+}])
+
+.controller('membersCtrl', ['$scope', '$http', function ($scope, $http){
+
+    
+    $scope.welcome = 'Welcome to the members page';
+    
+}])
+
+.controller('portfolioCtrl', ['$scope', '$http', function ($scope, $http){
+
+    
+    $scope.welcome = 'Welcome to the portfolio page';
+    
+}])
+
+.controller('votesCtrl', ['$scope', '$http', function ($scope, $http){
+
+    
+    $scope.welcome = 'Welcome to the votes page';
+    
+}])
+
+.controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
+
+    
+    $scope.welcome = 'Welcome to the reports page';
+    
 }]);
