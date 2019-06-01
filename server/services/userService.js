@@ -9,7 +9,8 @@ exports.create = function (req, res, callback){
         nationalId: req.body.nationalId,
         email: req.body.email,
         userStatus: req.body.userStatus,
-        password: req.body.password
+        password: req.body.password,
+        riskApetite: req.body.riskApetite
     })
     .success(function (user){
         if (callback){
@@ -67,37 +68,15 @@ exports.readAll = function (req, res, callback){
     })
 };
 
-exports.update = function (req, res, data, callback){
-    db.User.find({
-        where: {
-            id: req.params.id
-        }
-    })
-    .success(function (user){
-        if (user){
-            user.updateAttributes(data)
-            .success(function (user){
-                if (callback){
-                    callback(user)
-                }
-                else{
-                    res.send(200, user);
-                }
-            })
-            .error(function (err){
-                console.log('error: userService.update - when updating attributes');
-                res.send(500, {error: 'error: userService.update - when updating attributes'});
-            })
-        }
-        else{
-            console.log('error: userService.update - user does not exist');
-            res.send(500, {error: 'error: userService.read - user does not exist'});
-        }
-    })
-    .error(function (err){
-        console.log('error: userService.update');
-        res.send(500, {error: 'error: userService.update'});
-    })
+exports.update = function(req, res){
+    let updateValues = { riskApetite: req.body.riskApetite }
+    db.User.update(updateValues, { id:req.params.id } ).then((result) => {
+        // here result will be [ 1 ], if the id column is unique in your table
+        // the problem is that you can't return updated instance, you would have to retrieve it from database once again
+        console.log(result);
+    }).catch(e => {
+        console.log(e);
+    });
 };
 
 exports.delete = function (req, res){

@@ -1,15 +1,35 @@
 'use strict';
 
 
-angular.module('app.controllers', ['socketService'])
 
-.controller('HomeCtrl', ['$scope', 'socket','$http', function ($scope, socket, $http){
+angular.module('app.controllers', [])
+
+.controller('HomeCtrl', ['$scope','$http', function ($scope, $http){
 
     
     $scope.welcome = 'Welcome to the angular express world';
     
 }])
 
+.controller('riskCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
+
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    console.log(user.id)
+    $scope.submitRiskForm = function(){
+        var url = 'http://localhost:8000/api/user/edit/'+user.id
+        console.log($scope.answer1)
+        $http.put(url, {
+            riskApetite: $scope.answer1
+        },
+        {
+          headers: { 'Content-Type': 'application/json; charset=UTF-8'}
+        }).then(function(response) { 
+            console.log(response) 
+            $location.path('/')
+        }).catch(err => console.log(err))
+    }
+    
+}])
 
 .controller('registerCtrl',['$scope','$http','$location',function($scope, $http, $location){
     $scope.submitUserForm = function(){
@@ -43,10 +63,19 @@ angular.module('app.controllers', ['socketService'])
                 password: $scope.password
             }
         }).then(function(response){ 
-            if(response.status === 200){
+            console.log(response.data.userStatus)
+            if(response.data.userStatus === null){
                 console.log('youre logged in')
-                localStorage.setItem('currentUser',JSON.stringify({ token:"token",email:response.data.email}))
-                $location.path('/')
+                localStorage.setItem('currentUser',
+                    JSON.stringify({
+                        token:"tokens",
+                        email:response.data.email, 
+                        userStatus:response.data.userStatus, 
+                        chamaId:response.data.chamaId,
+                        id:response.data.id
+                    })
+                )
+                $location.url('/risk')
             }
             console.log(response.status)
         }).catch(err => console.log(err))

@@ -10,7 +10,7 @@ exports = module.exports = function (app, passport){
     app.get('/api/user', routes.user.readAll);
     app.post('/api/user', routes.user.create);
     app.get('/api/user/:id', routes.user.read);
-    app.get('/api/user/edit/:id', routes.user.update);
+    app.put('/api/user/edit/:id', routes.user.update);
     app.get('/api/user/delete/:id', routes.user.delete);
 
     //chamas

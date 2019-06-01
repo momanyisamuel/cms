@@ -45,6 +45,12 @@ angular.module('app', ['app.controllers', 'ngRoute'])
     .otherwise({
         redirectTo: '/'
     })
+    .when('/risk', {
+        templateUrl: '/views/partials/riskapetite.html',
+        controller: 'riskCtrl'})
+    .otherwise({
+        redirectTo: '/'
+    })
     .when('/loans', {
         templateUrl: '/views/partials/loans.html',
         controller: 'loansCtrl'})

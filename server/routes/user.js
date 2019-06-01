@@ -23,13 +23,7 @@ exports.readAll = function (req, res){
 };
 
 exports.update = function (req, res){
-    var data = req.body;
-    
-    if (data.password){
-        console.log('Data: ' + JSON.stringify(data));
-        data.password = security.hashPassword(data.password);
-    }
-    userService.update(req, res, data);
+    userService.update(req, res);
 };
 
 exports.delete = function (req, res){
