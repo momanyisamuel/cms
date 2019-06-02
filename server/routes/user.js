@@ -40,3 +40,7 @@ exports.findByEmail = function (req, res) {
         }
     });
 }
+
+exports.sendInvites = function (req,res){
+    userService.sendInvites(req, res);
+}

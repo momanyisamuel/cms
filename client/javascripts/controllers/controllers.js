@@ -65,7 +65,7 @@ angular.module('app.controllers', [])
                         token:"tokens",
                         email:response.data.email, 
                         userStatus:response.data.userStatus, 
-                        chamaId:response.data.chamaId,
+                        ChamaId:response.data.ChamaId,
                         id:response.data.id
                     })
                 )
@@ -96,8 +96,27 @@ angular.module('app.controllers', [])
     $scope.welcome = 'Welcome to the LOANS page';
 }])
 
-.controller('membersCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the members page';
+.controller('membersCtrl', ['$scope', '$http', '$location', function ($scope, $http,$location){
+  
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    
+    $scope.sendInvite = function() {
+        var url = 'http://localhost:8000/invite/user/'+user.ChamaId
+
+        $http.post(url, {
+                email: $scope.inviteEmail
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/members')
+        }).catch(err => console.log(err))
+    }
+    // var form = document.getElementById('inviteForm')
+    // form.addEventListener("submit", $scope.sendInvite)
+    
 }])
 
 .controller('portfolioCtrl', ['$scope', '$http', function ($scope, $http){

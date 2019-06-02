@@ -18,7 +18,7 @@ if (process.env.HEROKU_URL){
     })
 }
 else{
-    sequelize = new Sequelize('test', 'postgres', 'admin',{
+    sequelize = new Sequelize('test', 'postgres', '',{
       host: 'localhost',
       dialect: 'postgres'
     });

@@ -4,7 +4,6 @@
             <div>
                 <li><a href="#"><span style="font-weight: bold">Members</span></a></li>
                 <li><a href="#"></a></li>
-                <li><a href="">-------</a></li>
             </div>
             <!-- display if user is in a group  -->
             <li><a href="#/deposits">Deposits</a></li>
@@ -29,14 +28,40 @@
             <div class="data-section">
                 <!-- notification -->
                 <div class="message-card">
-                    <h4> This is a summary of your standing in chamaa <span><i class="fas fa-plus"></i></span></h4>
+                    <h4> This is a summary of your standing in chamaa <span><i class="fa fa-times"></i></span></h4>
                 </div>
+                
                 <div class="row">
                     <div class="row-column">
-                        <h4>View mmember contributions</h4>
+                        <div class="summary-card">
+                            <h4>Total member contributions</h4>
+                            <div>
+                                <p>Your risk Rating is <span style="color:crimson">High</span></p>
+                            </div>
+                        </div>
                     </div>
                     <div class="row-column">
-                        <h4>personal member management</h4>
+                        <div class="summary-card">
+                            <h4>Total Member</h4>
+                            <div>
+                                <p>Your Chama has <span style="color: chartreuse">8</span> members</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="invites">
+                    <h3>Send invites</h3><br>
+                    <div class="invite-form">
+                        <form id="inviteForm" name="inviteForm" ng-submit="sendInvite()">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" placeholder="email@email.com" ng-model="inviteEmail">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit">Send Invites</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- polls -->

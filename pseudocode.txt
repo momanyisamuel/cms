@@ -1,0 +1,12 @@
+send invites
+group admin add list of emails to be invited to group
+add invited users to database with userStatus invited and groupId
+invitees recieve invites 
+is directed to registration form
+
+accept invite
+on submit details check database for email and userStatus
+if invited update details and update userStatus to active
+show group menu items
+
+

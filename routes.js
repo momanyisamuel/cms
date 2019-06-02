@@ -6,6 +6,7 @@ exports = module.exports = function (app, passport){
     });
     
     app.get('/api/login', routes.user.findByEmail)
+    app.post('/invite/user/:ChamaId', routes.user.sendInvites)
     //users
     app.get('/api/user', routes.user.readAll);
     app.post('/api/user', routes.user.create);

@@ -24,6 +24,7 @@
         "superagent": "*"
     },
     "devDependencies": {
+        "nodemailer": "^6.2.1",
         "pg": "^6.4.2",
         "pg-hstore": "^2.3.2"
     }
