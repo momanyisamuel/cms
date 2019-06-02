@@ -1,31 +1,26 @@
 'use strict';
 
-
-
 angular.module('app.controllers', [])
 
 .controller('HomeCtrl', ['$scope','$http', function ($scope, $http){
-
-    
     $scope.welcome = 'Welcome to the angular express world';
-    
 }])
 
 .controller('riskCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
 
     var user = JSON.parse(localStorage.getItem('currentUser'))
-    console.log(user.id)
     $scope.submitRiskForm = function(){
         var url = 'http://localhost:8000/api/user/edit/'+user.id
-        console.log($scope.answer1)
+
         $http.put(url, {
-            riskApetite: $scope.answer1
-        },
-        {
-          headers: { 'Content-Type': 'application/json; charset=UTF-8'}
+                riskApetite: $scope.answer1
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
         }).then(function(response) { 
             console.log(response) 
-            $location.path('/')
+            $location.url('/')
         }).catch(err => console.log(err))
     }
     
@@ -54,7 +49,6 @@ angular.module('app.controllers', [])
 .controller('loginCtrl',['$scope','$http','$location',function($scope, $http, $location){
     var currentUser = []
     $scope.submitLoginForm = function(){
-        console.log($scope.email)
         var url = 'http://localhost:8000/api/login'
         $http.get(url,{
             headers : {'Accept' : 'application/json; charset=UTF-8'},
@@ -84,61 +78,36 @@ angular.module('app.controllers', [])
     $scope.logout = function () {
         return localStorage.setItem('currentUser', null)
     }
-
 }])
 
 .controller('depositsCtrl', ['$scope', '$http', function ($scope, $http){
-
-    
     $scope.welcome = 'Welcome to the deposits page';
-    
 }])
 
-.controller('withdrawalsCtrl', ['$scope', '$http', function ($scope, $http){
-
-    
+.controller('withdrawalsCtrl', ['$scope', '$http', function ($scope, $http){ 
     $scope.welcome = 'Welcome to the withdrawals page';
-    
 }])
 
 .controller('finesCtrl', ['$scope', '$http', function ($scope, $http){
-
-    
     $scope.welcome = 'Welcome to the fines page';
-    
 }])
 
 .controller('loansCtrl', ['$scope', '$http', function ($scope, $http){
-
-    
     $scope.welcome = 'Welcome to the LOANS page';
-    
 }])
 
 .controller('membersCtrl', ['$scope', '$http', function ($scope, $http){
-
-    
     $scope.welcome = 'Welcome to the members page';
-    
 }])
 
 .controller('portfolioCtrl', ['$scope', '$http', function ($scope, $http){
-
-    
     $scope.welcome = 'Welcome to the portfolio page';
-    
 }])
 
 .controller('votesCtrl', ['$scope', '$http', function ($scope, $http){
-
-    
     $scope.welcome = 'Welcome to the votes page';
-    
 }])
 
 .controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
-
-    
     $scope.welcome = 'Welcome to the reports page';
-    
 }]);

@@ -71,4 +71,56 @@ userService.findByEmail({where:{ email : data.email }}, function(err, user){
             })
 
 
-            
+            if(user){
+                db.User.update(user,{
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    phoneNumber: req.body.phoneNumber,
+                    nationalId: req.body.nationalId,
+                    email: req.body.email,
+                    userStatus: req.body.userStatus,
+                    password: req.body.password,
+                    riskApetite: req.params.riskApetite
+                })
+                .success(function (user){
+        
+                    if (callback){
+                        callback(user)
+                    }
+                    else {
+                        res.status(200).send([{result: user}]);  
+                    }
+                })
+                .error(function (err){
+                    console.log('error here');
+                })
+            }else{
+                console.log('error - user does not exist');
+                res.send(500, {error: 'error - user does not exist'});
+            }
+
+
+
+            exports.update = function (req, res, callback){
+                db.User.find({
+                    where: {
+                        id: req.params.id
+                    }
+                })
+                .success(function (user){
+                    // console.log(user)
+                    console.log(user.id)
+                    if(user.id === req.params.id){
+                    let updateValues = { riskApetite: req.body.riskApetite }
+                    db.User.update(updateValues).then((self) => {
+                        // here your result is simply an array with number of affected rows
+                        console.log(self);
+                        // [ 1 ]
+                    });}
+                    
+                })
+                .error(function (err){
+                    console.log('error');
+                    res.send(500, {error: 'error'});
+                })
+            };

@@ -113,6 +113,7 @@ input {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  width: auto;
 }
 input:focus {
   border: solid 1px #EEA34A;
@@ -195,6 +196,17 @@ label, input {
   width: 80%;
   margin-left: 18%;
   float: left;
+}
+
+.riskForm .form-group {
+  display: flex;
+  flex-direction: row;
+}
+.riskForm .form-group input {
+  margin: 0 10px 7px 0;
+}
+.riskForm .form-group label {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
