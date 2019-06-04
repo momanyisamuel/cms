@@ -1,0 +1,49 @@
+<div class="main-section">           
+        <div class="sidebar">
+            <ul class="sidebar-menu">
+                <div>
+                    <li><a href="#"><span style="font-weight: bold">Poll List</span></a></li>
+                    <li><a href="#"></a></li>
+                </div>
+                <!-- display if user is in a group  -->
+                <li><a href="#/deposits">Deposits</a></li>
+                <li><a href="#/withdrawals">Withdrawals</a></li>
+                <li><a href="#/loans">Loans</a></li>
+                <li><a href="#/members">Members</a></li>
+                <li><a href="#/fines">Fines</a></li>
+                <li><a href="#/votes">Votes</a></li>
+                <li><a href="#/portfolio">Portfolio</a></li>
+                <li><a href="#/reports">Reports</a></li>
+            </ul>
+            <div class="sidebar-user">
+                <p><i class="far fa-user-circle"></i> John Doe</p>
+            </div>
+        </div>
+    <div class="inner-section">
+        <div class="main-content">
+            <div class="data-section">
+                <div class="">
+                    <div class="">
+                    <a href="#/new" class="btn btn-default"><span class="glyphicon
+                        glyphicon-plus"></span> New Poll</a>
+                    </div>
+                    <div class="">
+                        <input type="text" class="form-control" ng-model="query"
+                        placeholder="Search for a poll">
+                    </div>
+                </div>
+                <div class="" ng-switch on="polls.length">
+                    <ul ng-switch-when="0">
+                        <li><em>No polls in database. Would you like to
+                        <a href="#/new">create one</a>?</li>
+                    </ul>
+                    <ul ng-switch-default>
+                        <li ng-repeat="poll in polls | filter:query">
+                        <a href="#/poll/{{poll._id}}">{{poll.question}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
