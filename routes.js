@@ -7,6 +7,8 @@ exports = module.exports = function (app, passport){
     
     app.get('/api/login', routes.user.findByEmail)
     app.post('/invite/user/:ChamaId', routes.user.sendInvites)
+    app.put('/api/acceptinvite', routes.user.acceptInvites)
+    
     //users
     app.get('/api/user', routes.user.readAll);
     app.post('/api/user', routes.user.create);
@@ -69,4 +71,8 @@ exports = module.exports = function (app, passport){
     app.get('/api/portfolio/edit/:id', routes.portfolio.update);
     app.get('/api/portfolio/delete/:id', routes.portfolio.delete);
     //end
+    app.post('/api/poll', routes.poll.create);
+    app.get('/api/poll', routes.poll.readAll);
+    app.get('/api/poll/:id', routes.poll.read);
+
 }

@@ -171,7 +171,7 @@ exports.sendInvites = function(req, res, callback) {
     const output = `
         <p>You have been invited to join a chama by ${req.body.email} </p>
         <h3>Accept invite and register</h3>
-        <button><a href="<acceptUrl>">Accept</a></button>
+        <button><a href="http://localhost:8000/#/acceptinvite">Accept</a></button>
     `
     
     // create reusable transporter object using the default SMTP transport
@@ -223,13 +223,13 @@ exports.acceptInvites = function(req,res){
         lastName     :   req.body.lastName,
         phoneNumber  :   req.body.phoneNumber,
         nationalId   :   req.body.nationalId,
-        userStatus   :   req.body.userStatus,
-        password     :   req.body.password,
-        riskApetite  :   req.body.riskApetite
+        userStatus   :   1,
+        password     :   req.body.password
     }
     db.User.update(updateValues, { 
         email: req.body.email 
     } ).then((result) => {
+        res.status(200).send([{result: result}])
         console.log(result);
     }).catch(e => {
         console.log(e);

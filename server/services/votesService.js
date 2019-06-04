@@ -2,8 +2,6 @@ var db = require('../models');
 
 exports.create = function (req, res, callback){
     db.Votes.create({
-        question: req.body.question,
-        description: req.body.description,
         answer: req.body.answer,
         pollDate: req.body.pollDate
     })

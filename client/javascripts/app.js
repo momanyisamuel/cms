@@ -74,7 +74,14 @@ angular.module('app', ['app.controllers', 'ngRoute'])
         controller: 'reportsCtrl'})
     .otherwise({
         redirectTo: '/'
-    });
+    })
+    .when('/acceptinvites', {
+        templateUrl: '/views/partials/acceptinvites.html',
+        controller: 'invitesCtrl'})
+    .otherwise({
+        redirectTo: '/'
+    })
+    ;
 })
 .run(function (){
 

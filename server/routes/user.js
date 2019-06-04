@@ -44,3 +44,7 @@ exports.findByEmail = function (req, res) {
 exports.sendInvites = function (req,res){
     userService.sendInvites(req, res);
 }
+
+exports.acceptInvites = function (req,res){
+    userService.acceptInvites(req, res);
+}

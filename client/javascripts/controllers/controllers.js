@@ -96,6 +96,30 @@ angular.module('app.controllers', [])
     $scope.welcome = 'Welcome to the LOANS page';
 }])
 
+.controller('invitesCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location){
+    $scope.accept = function(){
+        var url = 'http://localhost:8000/api/acceptinvite'
+
+        $http.put(url, {
+                firstName: $scope.acceptfirstName,
+                lastName: $scope.acceptlastName,
+                phoneNumber: $scope.acceptphoneNumber,
+                nationalId: $scope.acceptnationalId,
+                email: $scope.acceptemail,
+                password: $scope.acceptpassword
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/risk')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('accept')
+    form.addEventListener("submit", $scope.accept)
+}])
 .controller('membersCtrl', ['$scope', '$http', '$location', function ($scope, $http,$location){
   
     var user = JSON.parse(localStorage.getItem('currentUser'))
