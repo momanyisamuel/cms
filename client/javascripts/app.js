@@ -74,6 +74,27 @@ angular.module('app', ['app.controllers', 'ngRoute'])
         controller: 'reportsCtrl'})
     .otherwise({
         redirectTo: '/'
+    })
+    
+    .when('/listpolls', {
+        templateUrl: '/views/partials/listpolls.html',
+        controller: 'pollCtrl'})
+    .otherwise({
+        redirectTo: '/'
+    })
+    
+    .when('/polldetails', {
+        templateUrl: '/views/partials/polldetails.html',
+        controller: 'pollCtrl'})
+    .otherwise({
+        redirectTo: '/'
+    })
+
+    .when('/newpoll', {
+        templateUrl: '/views/partials/newpoll.html',
+        controller: 'pollCtrl'})
+    .otherwise({
+        redirectTo: '/'
     });
 })
 .run(function (){
