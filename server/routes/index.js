@@ -9,4 +9,4 @@ exports.portfolio = require('./portfolio');
 exports.vote = require('./vote');
 exports.withdrawal = require('./withdrawals');
 exports.poll = require('./poll');
-exports.socket = require('./socket');
+// exports.socket = require('./socket');
