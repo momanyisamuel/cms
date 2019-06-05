@@ -153,4 +153,7 @@ angular.module('app.controllers', [])
 
 .controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
     $scope.welcome = 'Welcome to the reports page';
+}])
+.controller('pollCtrl', ['$scope', '$http', function ($scope, $http){
+    $scope.welcome = 'Welcome to the reports page';
 }]);
