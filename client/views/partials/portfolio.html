@@ -37,26 +37,27 @@
                         <h3>Add your new item to the chama Portfolio</h3>
                         <h3>----------------------</h3>
                         <div class="auth-form--body">
-                            <form name="userForm" ng-submit="submitUserForm()">
+                            <form id="portfolioForm" ng-submit="portfolioForm()">
                                 <div class="form-group">
                                 <label for="name">Asset/Liability Name:</label>
-                                    <input ng-model="name" type="text" class="form-control" id="name" placeholder="Item Name"/>
+                                    <input ng-model="assetName" type="text" class="form-control" id="name" placeholder="Item Name"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="category">Item Category:</label>
-                                    <input ng-model="category" type="text" class="form-control" id="category" placeholder="Land,vehicle,property,business"/>
+                                    <input ng-model="assetCategory" type="text" class="form-control" id="category" placeholder="Land,vehicle,property,business"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="assetFlag">Is this an Asset?:</label>
-                                    <input ng-model="assetFlag" type="text" class="form-control" id="assetFlag" placeholder="Yes or No"/>
+                                    <input ng-model="assetFlag" type="radio" class="form-control" id="assetFlag" name="Yes" value="1"/> yes 
+                                    <input ng-model="assetFlag" type="radio" class="form-control" id="assetFlag" name="No" value="2"/> No 
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Item description:</label>
-                                    <input ng-model="description" type="text" class="form-control" id="description" placeholder="Details of the item"/>
+                                    <input ng-model="assetDescription" type="text" class="form-control" id="description" placeholder="Details of the item"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="amount">Cost of Item:</label>
-                                    <input ng-model="amount" type="text" class="form-control" id="amount" placeholder="Amount"/>
+                                    <input ng-model="assetAmount" type="text" class="form-control" id="amount" placeholder="Amount"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="dateRecorded">Date Purchased:</label>

@@ -83,14 +83,14 @@ angular.module('app', ['app.controllers','app.services', 'ngRoute'])
     })    
     .when('/listpolls', {
         templateUrl: '/views/partials/listpolls.html',
-        controller: 'pollCtrl'})
+        controller: 'PollListCtrl'})
     .otherwise({
         redirectTo: '/'
     })
     
-    .when('/polldetails', {
+    .when('/polldetails/:id', {
         templateUrl: '/views/partials/polldetails.html',
-        controller: 'pollCtrl'})
+        controller: 'PollItemCtrl'})
     .otherwise({
         redirectTo: '/'
     })
