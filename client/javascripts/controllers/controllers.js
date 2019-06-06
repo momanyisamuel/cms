@@ -2,6 +2,7 @@
 
 angular.module('app.controllers', [])
 
+
 .controller('HomeCtrl', ['$scope','$http', function ($scope, $http){
     $scope.welcome = 'Welcome to the angular express world';
 }])
@@ -153,4 +154,13 @@ angular.module('app.controllers', [])
 
 .controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
     $scope.welcome = 'Welcome to the reports page';
+}])
+.controller('pollCtrl', ['$scope', '$http','$resource', function ($scope, $http, $resource){
+    $scope.polls = Poll.get();
+    var Poll = function($resource) {
+        $resource('api/poll', {}, {
+            // Use this method for getting a list of polls
+            query: { method: 'GET',  isArray: true }
+        })
+    }
 }]);
