@@ -127,8 +127,27 @@ angular.module('app.controllers', ['app', 'ngResource'])
     $scope.welcome = 'Welcome to the withdrawals page';
 }])
 
-.controller('finesCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the fines page';
+.controller('finesCtrl',  ['$scope','$http','$location', function ($scope, $http, $location){
+    var fineMember = function(){
+        var url = 'http://localhost:8000/api/fine'
+
+        $http.post(url, {
+            fineDate: $scope.fineDate,
+            fineCategory: $scope.fineCategory,
+            fineAmount: $scope.fineAmount,
+            comment: $scope.comment
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/members')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('fineMember')
+    form.addEventListener("submit", fineMember)
 }])
 
 .controller('loansCtrl', ['$scope', '$http', function ($scope, $http){
