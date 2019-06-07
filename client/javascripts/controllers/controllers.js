@@ -4,8 +4,25 @@ angular.module('app.controllers', ['app', 'ngResource'])
 
 
 
-.controller('HomeCtrl', ['$scope','$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the angular express world';
+.controller('HomeCtrl', ['$scope','$http','$location', function ($scope, $http, $location){
+    var createChama = function(){
+        var url = 'http://localhost:8000/api/chama'
+
+        $http.post(url, {
+                name: $scope.name,
+                country: $scope.country,
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/members')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('createChama')
+    form.addEventListener("submit", createChama)
 }])
 
 .controller('riskCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
@@ -82,8 +99,28 @@ angular.module('app.controllers', ['app', 'ngResource'])
     }
 }])
 
-.controller('depositsCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the deposits page';
+.controller('contributionCtrl',  ['$scope','$http','$location', function ($scope, $http, $location){
+    var contributionForm = function(){
+        var url = 'http://localhost:8000/api/contribution'
+
+        $http.post(url, {
+            contributionDate: $scope.contributionDate,
+            payRefNumber: $scope.payRefNumber,
+            contributionAmount: $scope.contributionAmount,
+            fundAssignment: $scope.fundAssignment,
+            comment: $scope.comment
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/members')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('contributionForm')
+    form.addEventListener("submit", contributionForm)
 }])
 
 .controller('withdrawalsCtrl', ['$scope', '$http', function ($scope, $http){ 
@@ -164,7 +201,7 @@ angular.module('app.controllers', ['app', 'ngResource'])
             }
         }).then(function(response) { 
             console.log(response) 
-            $location.url('/')
+            $location.url('/portfolioview')
         }).catch(err => console.log(err))
     }
 
@@ -289,4 +326,12 @@ angular.module('app.controllers', ['app', 'ngResource'])
             };
 
     
+}])
+
+// Controller for the portfolio list
+.controller('PortfolioListCtrl', ['$scope' ,'$http',function ($scope, $http) {
+    $http.get('http://localhost:8000/api/portfolio').then((response)=>{
+        console.log(response.data)
+        $scope.portfolios = response.data
+    }).catch(err=>console.log(err))
 }]);

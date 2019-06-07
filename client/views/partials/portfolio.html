@@ -7,7 +7,7 @@
                 <li><a href="">-------</a></li>
             </div>
             <!-- display if user is in a group  -->
-            <li><a href="#/deposits">Deposits</a></li>
+            <li><a href="#/contribution">contribution</a></li>
             <li><a href="#/withdrawals">Withdrawals</a></li>
             <li><a href="#/loans">Loans</a></li>
             <li><a href="#/members">Members</a></li>
@@ -22,20 +22,23 @@
         </div>
     </div>
     <div class="inner-section">
-            <div class="top-bar">
-                
+            <div class="inner-bar">
+                <div class="inner-bar--title">
+                    <h3>Add your new item to the chama Portfolio</h3>
+                </div>
+                <ul class="inner-bar--nav">
+                    <li><a href="#/portfolioview"><i class="fas fa-plus"></i> Chama portfolio</a></li>
+                </ul>
             </div>
             
             <div class="main-content">
             <div class="data-section">
                 <!-- notification -->
-                <div class="message-card">
+                <!-- <div class="message-card">
                     <h4> This is a message <span><i class="fas fa-plus"></i></span></h4>
-                </div>
+                </div> -->
                 <div class="auth-form">
                     <div class="auth-form--title">
-                        <h3>Add your new item to the chama Portfolio</h3>
-                        <h3>----------------------</h3>
                         <div class="auth-form--body">
                             <form id="portfolioForm" ng-submit="portfolioForm()">
                                 <div class="form-group">
@@ -46,10 +49,12 @@
                                     <label for="category">Item Category:</label>
                                     <input ng-model="assetCategory" type="text" class="form-control" id="category" placeholder="Land,vehicle,property,business"/>
                                 </div>
-                                <div class="form-group">
-                                    <label for="assetFlag">Is this an Asset?:</label>
-                                    <input ng-model="assetFlag" type="radio" class="form-control" id="assetFlag" name="Yes" value="1"/> yes 
-                                    <input ng-model="assetFlag" type="radio" class="form-control" id="assetFlag" name="No" value="2"/> No 
+                                <div class="form-group radio">
+                                    <h4>Is this an Asset?:</h4>
+                                    <input ng-model="assetFlag" type="radio" class="form-control radio" id="assetFlag" name="Yes" value="1"/>  
+                                    <label for="assetFlag">yes</label>
+                                    <input ng-model="assetFlag" type="radio" class="form-control radio" id="assetFlag" name="No" value="2"/> 
+                                    <label for="assetFlag">No </label>
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Item description:</label>

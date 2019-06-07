@@ -2,7 +2,7 @@ var db = require('../models'),
 contributionService =  require('../services/contributionsService');
 
 exports.create = function (req, res){
-    if(!req.body.hasOwnProperty('depositDate') || !req.body.hasOwnProperty('payRefNumber')){
+    if(!req.body.hasOwnProperty('contributionDate') || !req.body.hasOwnProperty('payRefNumber')){
         console.log('Error 400: Post syntax incorrect.');
         res.send(400, 'Error 400: Post syntax incorrect.');
     }
