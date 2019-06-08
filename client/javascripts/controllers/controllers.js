@@ -1,9 +1,28 @@
 'use strict';
 
-angular.module('app.controllers', [])
+angular.module('app.controllers', ['app', 'ngResource'])
 
-.controller('HomeCtrl', ['$scope','$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the angular express world';
+
+
+.controller('HomeCtrl', ['$scope','$http','$location', function ($scope, $http, $location){
+    var createChama = function(){
+        var url = 'http://localhost:8000/api/chama'
+
+        $http.post(url, {
+                name: $scope.name,
+                country: $scope.country,
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/members')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('createChama')
+    form.addEventListener("submit", createChama)
 }])
 
 .controller('riskCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
@@ -80,16 +99,55 @@ angular.module('app.controllers', [])
     }
 }])
 
-.controller('depositsCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the deposits page';
+.controller('contributionCtrl',  ['$scope','$http','$location', function ($scope, $http, $location){
+    var contributionForm = function(){
+        var url = 'http://localhost:8000/api/contribution'
+
+        $http.post(url, {
+            contributionDate: $scope.contributionDate,
+            payRefNumber: $scope.payRefNumber,
+            contributionAmount: $scope.contributionAmount,
+            fundAssignment: $scope.fundAssignment,
+            comment: $scope.comment
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/members')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('contributionForm')
+    form.addEventListener("submit", contributionForm)
 }])
 
 .controller('withdrawalsCtrl', ['$scope', '$http', function ($scope, $http){ 
     $scope.welcome = 'Welcome to the withdrawals page';
 }])
 
-.controller('finesCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the fines page';
+.controller('finesCtrl',  ['$scope','$http','$location', function ($scope, $http, $location){
+    var fineMember = function(){
+        var url = 'http://localhost:8000/api/fine'
+
+        $http.post(url, {
+            fineDate: $scope.fineDate,
+            fineCategory: $scope.fineCategory,
+            fineAmount: $scope.fineAmount,
+            comment: $scope.comment
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/members')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('fineMember')
+    form.addEventListener("submit", fineMember)
 }])
 
 .controller('loansCtrl', ['$scope', '$http', function ($scope, $http){
@@ -143,9 +201,33 @@ angular.module('app.controllers', [])
     
 }])
 
-.controller('portfolioCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the portfolio page';
+.controller('portfolioCtrl', ['$scope', '$http' , '$location', function ($scope, $http, $location){
+    var portfolioForm = function(){
+        var url = 'http://localhost:8000/api/portfolio'
+
+        $http.post(url, {
+                name: $scope.assetName,
+                category: $scope.assetCategory,
+                assetFlag: $scope.assetFlag,
+                description: $scope.assetDescription,
+                amount: $scope.assetAmount,
+                dateRecorded: $scope.dateRecorded,
+                refDetails: $scope.refDetails,
+                comment: $scope.comment
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/portfolioview')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('portfolioForm')
+    form.addEventListener("submit", portfolioForm)
 }])
+
 
 .controller('votesCtrl', ['$scope', '$http', function ($scope, $http){
     $scope.welcome = 'Welcome to the votes page';
@@ -158,16 +240,117 @@ angular.module('app.controllers', [])
     $scope.welcome = 'Welcome to the reports page';
 }])
 
+// Controller for the poll list
+.controller('PollListCtrl', ['$scope' ,'$http',function ($scope, $http) {
+    $http.get('http://localhost:8000/api/poll').then((response)=>{
+        console.log(response.data)
+        $scope.polls = response.data
+    }).catch(err=>console.log(err))
+}])
+
+// Controller for an individual poll
+.controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http' , function ($scope, $routeParams, $http) {	
+    
+    
+	$http.get('http://localhost:8000/api/poll/'+$routeParams.id).then((response)=>{
+        console.log(response.data)
+        $scope.poll = response.data
+    }).catch(err=>console.log(err))
+
+	// socket.on('myvote', function(data) {
+	// 	console.dir(data);
+	// 	if(data._id === $routeParams.pollId) {
+	// 		$scope.poll = data;
+	// 	}
+	// });
+	
+	// socket.on('vote', function(data) {
+	// 	console.dir(data);
+	// 	if(data._id === $routeParams.pollId) {
+	// 		$scope.poll.choices = data.choices;
+	// 		$scope.poll.totalVotes = data.totalVotes;
+	// 	}		
+	// });
+	
+	$scope.vote = function() {
+		var pollId = $scope.poll.id,
+				choiceId = $scope.poll.userVote;
+		
+		if(choiceId) {
+			var voteObj = { poll_id: pollId, choice: choiceId };
+			// socket.emit('send:vote', voteObj);
+		} else {
+			alert('You must select an option to vote for');
+		}
+	};
+}])
+
 // Controller for creating a new poll
-.controller('PollNewCtrl' , [ '$scope', '$location', 'Poll' ,function ($scope, $location, Poll) {
+.controller('PollNewCtrl' , [ '$scope', '$location','$http' ,function ($scope, $location,$http) {
 	// Define an empty poll model object
 	$scope.poll = {
 		question: '',
-		choices: [ { text: '' }, { text: '' }, { text: '' }]
+		choices: [ { text: '' }, { text: '' }]
 	};
 	
 	// Method to add an additional choice option
 	$scope.addChoice = function() {
-		$scope.poll.choices.push({ text: '' });
-	};
+        $scope.poll.choices.push({ text: '' });
+        
+    };
+
+    // Validate and save the new poll to the database
+    $scope.createPoll = function() {
+        var poll = $scope.poll;
+        var getText = []
+        // Check that a question was provided
+        if(poll.question.length > 0) {
+            var choiceCount = 0;
+            
+            // Loop through the choices, make sure at least two provided
+            for(var i = 0, ln = poll.choices.length; i < ln; i++) {
+                var choice = poll.choices[i];
+                console.log(poll.choices[i].text)
+                getText.push(poll.choices[i].text)
+                
+                if(choice.text.length > 0) {
+                    choiceCount++
+                }
+            }
+        
+            if(choiceCount > 1) {
+                // Create a new poll from the model
+                // var newPoll = new Poll(poll);
+                
+                // Call API to save poll to the database - we need the group ID, User ID , question and choices and PollID for the Poll
+               console.log(getText)
+                       $http.post('http://localhost:8000/api/poll', {
+                            question:poll.question,
+                            choices:getText                       
+                            },
+                            {
+                                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+                            }
+                        }).then(function(response) { 
+                            console.log(response) 
+                            $location.url('/listpolls')
+                        }).catch(err => console.log(err))
+            
+                    } else {
+                        alert('You must enter at least two choices');
+                    }
+                } else {
+                    alert('You must enter a question');
+                }
+            };
+
+    
+}])
+
+// Controller for the portfolio list
+.controller('PortfolioListCtrl', ['$scope' ,'$http',function ($scope, $http) {
+    $http.get('http://localhost:8000/api/portfolio').then((response)=>{
+        console.log(response.data)
+        $scope.portfolios = response.data
+    }).catch(err=>console.log(err))
 }]);

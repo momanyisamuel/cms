@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       // associations can be defined here
       Poll.hasMany(models.Choice);
       Poll.belongsTo(models.User);
+      Poll.belongsTo(models.Chama);
      
     };
     return Poll;

@@ -1,9 +1,9 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Contributions = sequelize.define('Contributions', {
-    depositDate: DataTypes.STRING,
-    payRefNumber: DataTypes.INTEGER,
-    depositAmount: DataTypes.INTEGER,
+    contributionDate: DataTypes.STRING,
+    payRefNumber: DataTypes.STRING,
+    contributionAmount: DataTypes.INTEGER,
     fundAssignment: DataTypes.STRING,
     comment: DataTypes.STRING
   }, {});

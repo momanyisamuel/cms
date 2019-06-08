@@ -7,7 +7,7 @@
                 <li><a href="">-------</a></li>
             </div>
             <!-- display if user is in a group  -->
-            <li><a href="#/deposits">Deposits</a></li>
+            <li><a href="#/contribution">contribution</a></li>
             <li><a href="#/withdrawals">Withdrawals</a></li>
             <li><a href="#/loans">Loans</a></li>
             <li><a href="#/members">Members</a></li>
@@ -33,16 +33,33 @@
                 </div>
 
                 <div class="row">
-                    <div class="row-column">
-                        <h4>Fines accrued </h4>
-                    </div>
-                    <div class="row-column">
-                        <h4>Total Fines due to chamaa </h4>
-                    </div>
+                        <div class="group-form">
+                                <form id="fineMember" ng-submit="fineMember">
+                                    <div class="form-group">
+                                        <label for="Date of Fine"></label>
+                                        <input type="text" ng-model="fineDate" name="fineDate" placeholder="Date of Fine">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Fine Category"></label>
+                                        <input type="text" value="" ng-model="fineCategory" name="fineCategory" placeholder="e.g. Late Contribution..">
+                                    </div>
+                                    <div class="form-group">
+                                            <label for="Fine Amount"></label>
+                                            <input type="text" ng-model="fineAmount" name="fineAmount" placeholder="Fined Amount">
+                                        </div>
+                                    <div class="form-group">
+                                                <label for="Comment"></label>
+                                                <input type="text" ng-model="comment" name="comment" placeholder="comment">
+                                            </div>
+                                    <div class="form-group">
+                                        <button type="submit">Create Chama</button>
+                                    </div>
+                                    
+                                </form>
+                        </div>
                     </div>
                 </div>
                 <!-- polls -->
             </div>
         </div>
-    </div>
 </div>

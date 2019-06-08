@@ -2,10 +2,9 @@ var db = require('../models');
 
 exports.create = (req, res, callback) => {
     console.log(req.body)
-    let data = req.body.text;
+    let data = req.body.choices;
     db.Poll.create({
-        question: req.body.question,
-        choices: [req.body.text]
+        question: req.body.question
     }).success(function (poll){
         var passData = []
         data.forEach(element => {
