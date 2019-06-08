@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('app', ['app.controllers', 'ngRoute','app.services'])
+angular.module('app', ['app.controllers','app.services', 'ngRoute'])
+
 .config(function ($routeProvider){
     $routeProvider
     .when('/', {

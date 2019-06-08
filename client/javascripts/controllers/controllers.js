@@ -155,12 +155,20 @@ angular.module('app.controllers', [])
 .controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
     $scope.welcome = 'Welcome to the reports page';
 }])
-.controller('pollCtrl', ['$scope', '$http','$resource', function ($scope, $http, $resource){
-    $scope.polls = Poll.get();
-    var Poll = function($resource) {
-        $resource('api/poll', {}, {
-            // Use this method for getting a list of polls
-            query: { method: 'GET',  isArray: true }
-        })
-    }
+.controller('pollCtrl', ['$scope', '$http', function ($scope, $http){
+    $scope.welcome = 'Welcome to the reports page';
+}])
+
+// Controller for creating a new poll
+.controller('PollNewCtrl' , [ '$scope', '$location', 'Poll' ,function ($scope, $location, Poll) {
+	// Define an empty poll model object
+	$scope.poll = {
+		question: '',
+		choices: [ { text: '' }, { text: '' }, { text: '' }]
+	};
+	
+	// Method to add an additional choice option
+	$scope.addChoice = function() {
+		$scope.poll.choices.push({ text: '' });
+	};
 }]);
