@@ -30,9 +30,22 @@ angular.module('app.controllers', ['app', 'ngResource'])
     var user = JSON.parse(localStorage.getItem('currentUser'))
     $scope.submitRiskForm = function(){
         var url = 'http://localhost:8000/api/user/edit/'+user.id
+        
+        var riskSum = parseInt($scope.answer1)+parseInt($scope.answer2)+parseInt($scope.answer3)+parseInt($scope.answer4)+parseInt($scope.answer5)+parseInt($scope.answer6)+parseInt($scope.answer7)+parseInt($scope.answer8)+parseInt($scope.answer9)+parseInt($scope.answer10)+parseInt($scope.answer11)
+
+        var userRisk = riskSum/11
+        console.log(userRisk)
+
+        if(userRisk >0 && userRisk<1.6 ){
+            console.log('low')
+        }else if(userRisk >1.68 && userRisk<2.35){
+            console.log('medium')
+        }else if(userRisk>2.36 && userRisk<3){
+            console.log('High')
+        }
 
         $http.put(url, {
-                riskApetite: $scope.answer1
+                riskApetite: userRisk
             },
             {
                 headers: { 'Content-Type': 'application/json; charset=UTF-8'
@@ -41,7 +54,8 @@ angular.module('app.controllers', ['app', 'ngResource'])
             console.log(response) 
             $location.url('/')
         }).catch(err => console.log(err))
-    }
+    
+}
     
 }])
 
@@ -353,4 +367,26 @@ angular.module('app.controllers', ['app', 'ngResource'])
         console.log(response.data)
         $scope.portfolios = response.data
     }).catch(err=>console.log(err))
+}])
+
+.controller('goalFormCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
+
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.submitGoalForm = function(){
+        console.log($scope.answer1)
+        //\ var url = 'http://localhost:8000/api/user/edit/'+user.id
+
+        // $http.put(url, {
+        //         riskApetite: $scope.answer1
+        //     },
+    //         {
+    //             headers: { 'Content-Type': 'application/json; charset=UTF-8'
+    //         }
+    //     }).then(function(response) { 
+    //         console.log(response) 
+    //         $location.url('/')
+    //     }).catch(err => console.log(err))
+    // 
+}
+    
 }]);
