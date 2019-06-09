@@ -2,18 +2,18 @@
     <div class="sidebar">
         <ul class="sidebar-menu">
             <div>
-                <li><a href="#"><span style="font-weight: bold">Deposits</span></a></li>
+                <li><a href="#"><span style="font-weight: bold">Contributions</span></a></li>
                 <li><a href="#"></a></li>
                 <li><a href="#">-------</a></li>
             </div>
             <!-- display if user is in a group  -->
-            <li><a href="#/deposits">Deposits</a></li>
+            <li><a href="#/contribution">contribution</a></li>
             <li><a href="#/withdrawals">Withdrawals</a></li>
             <li><a href="#/loans">Loans</a></li>
             <li><a href="#/members">Members</a></li>
             <li><a href="#/fines">Fines</a></li>
             <li><a href="#/votes">Votes</a></li>
-            <li><a href="#/portfolio">Portfolio</a></li>
+            <li><a href="#/portfolioview">Portfolio</a></li>
             <li><a href="#/reports">Reports</a></li>
         </ul>
         <div class="sidebar-user">
@@ -31,25 +31,23 @@
                     <h4> This is a message <span><i class="fas fa-plus"></i></span></h4>
                 </div>
                 <div class="row">
-                    <div class="row-column">
-                        <h4>Add deposit</h4>
-                    </div>
+                </div>
                     <div class="auth-form">
                         <div class="auth-form--title">
                             <h3>Add your contribution below</h3><br>
                             <div class="auth-form--body">
-                            <form name="userForm" ng-submit="submitUserForm()">
+                            <form id="contributionForm" ng-submit="contributionForm()">
                                 <div class="form-group">
-                                    <label for="depositDate">Date Deposited:</label>
-                                    <input ng-model="depositDate" type="text" class="form-control" id="depositDate" placeholder="dd/mm/yyyy"/>
+                                    <label for="contributionDate">Date contributed:</label>
+                                    <input ng-model="contributionDate" type="text" class="form-control" id="depositDate" placeholder="dd/mm/yyyy"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="payRefNumber">Payment Reference Number:</label>
                                     <input ng-model="payRefNumber" type="text" class="form-control" id="payRefNumber" placeholder="MPESA REF"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="depositAmount">Amount Deposited:</label>
-                                    <input ng-model="depositAmount" type="text" class="form-control" id="depositAmount" placeholder="Amount"/>
+                                    <label for="contributionAmount">Amount contributed:</label>
+                                    <input ng-model="contributionAmount" type="text" class="form-control" id="depositAmount" placeholder="Amount"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="fundAssignment">Purpose of funds:</label>
@@ -64,7 +62,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                -
             </div>
         </div>
     </div>

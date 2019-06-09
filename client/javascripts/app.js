@@ -16,9 +16,9 @@ angular.module('app', ['app.controllers','app.services', 'ngRoute'])
     .otherwise({
         redirectTo: '/'
     })
-    .when('/deposits', {
-        templateUrl: '/views/partials/deposits.html',
-        controller: 'depositsCtrl'})
+    .when('/contribution', {
+        templateUrl: '/views/partials/contribution.html',
+        controller: 'contributionCtrl'})
     .otherwise({
         redirectTo: '/'
     })
@@ -84,14 +84,14 @@ angular.module('app', ['app.controllers','app.services', 'ngRoute'])
     })    
     .when('/listpolls', {
         templateUrl: '/views/partials/listpolls.html',
-        controller: 'pollCtrl'})
+        controller: 'PollListCtrl'})
     .otherwise({
         redirectTo: '/'
     })
     
-    .when('/polldetails', {
+    .when('/polldetails/:id', {
         templateUrl: '/views/partials/polldetails.html',
-        controller: 'pollDetailsCtrl'})
+        controller: 'PollItemCtrl'})
     .otherwise({
         redirectTo: '/'
     })
@@ -101,7 +101,15 @@ angular.module('app', ['app.controllers','app.services', 'ngRoute'])
         controller: 'pollNewCtrl'})
     .otherwise({
         redirectTo: '/'
-    });
+    })
+    
+    .when('/portfolioview/', {
+        templateUrl: '/views/partials/portfolioview.html',
+        controller: 'PortfolioListCtrl'})
+    .otherwise({
+        redirectTo: '/'
+    })
+    ;
 })
 .run(function (){
 

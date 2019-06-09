@@ -2,9 +2,9 @@ var db = require('../models');
 
 exports.create = function (req, res, callback){
     db.Contributions.create({
-        depositDate: req.body.depositDate,
+        contributionDate: req.body.contributionDate,
         payRefNumber: req.body.payRefNumber,
-        depositAmount: req.body.depositAmount,
+        contributionAmount: req.body.contributionAmount,
         fundAssignment: req.body.fundAssignment,
         comment: req.body.comment
     })

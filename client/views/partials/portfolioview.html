@@ -2,7 +2,7 @@
     <div class="sidebar">
         <ul class="sidebar-menu">
             <div>
-                <li><a href="#"><span style="font-weight: bold">Withdrawals</span></a></li>
+                <li><a href="#"><span style="font-weight: bold">Portfolio</span></a></li>
                 <li><a href="#"></a></li>
                 <li><a href="">-------</a></li>
             </div>
@@ -22,27 +22,28 @@
         </div>
     </div>
     <div class="inner-section">
-        <div class="top-bar">
+            <div class="inner-bar">
+                <div class="inner-bar--title">
+                    <h2>Asset and Liabilities</h2>
+                </div>
+                <ul class="inner-bar--nav">
+                    <li><a href="#/portfolio"><i class="fas fa-plus"></i> add to portfolio</a></li>
+                </ul>
+            </div>
             
-        </div>
-        
-        <div class="main-content">
+            <div class="main-content">
             <div class="data-section">
                 <!-- notification -->
                 <div class="message-card">
-                    <h4> This is a message <span><i class="fas fa-plus"></i></span></h4>
+                    <h4> This are your chamaa's asset/liabilities<span><i class="fas fa-plus"></i></span></h4>
                 </div>
-
-                <div class="row">
-                    <div class="row-column">
-                        <h4>Add withdrawal or make group payment form</h4>
-                    </div>
-                    <div class="row-column">
-                        <h4>total withdrawal made</h4>
-                    </div>
+                
+                <div class="assetlist" ng-repeat="portfolio in portfolios">
+                    <li><a href="#">{{portfolio.name}}</a></li>
                 </div>
-                <!-- polls -->
             </div>
-        </div>
+            </div>
+    </div>
+    </div>
     </div>
 </div>

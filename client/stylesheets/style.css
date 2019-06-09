@@ -255,4 +255,25 @@ label, input {
   margin: 0;
 }
 
+.inner-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #EFEFEF;
+}
+
+.radio {
+  display: flex;
+  padding-bottom: 1rem;
+}
+.radio h4, .radio input, .radio label {
+  margin: 0;
+}
+.radio input, .radio label {
+  margin-left: 1rem;
+}
+.radio input {
+  width: 3rem;
+}
+
 /*# sourceMappingURL=style.css.map */

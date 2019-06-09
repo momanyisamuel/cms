@@ -9,7 +9,12 @@ module.exports = function(sequelize, DataTypes){
       email: DataTypes.STRING,
       userStatus: DataTypes.INTEGER,
       riskApetite: DataTypes.INTEGER,
-      password: DataTypes.STRING
+      password: DataTypes.STRING,
+      admin: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: '0'
+      } 
     });
     
     User.associate = function(models) {

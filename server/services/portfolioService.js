@@ -3,7 +3,8 @@ var db = require('../models');
 exports.create = function (req, res, callback){
     db.Portfolio.create({
         name: req.body.name,
-        category: req.body.assetFlag,
+        category: req.body.category,
+        assetFlag: req.body.assetFlag,
         description: req.body.description,
         amount: req.body.amount,
         dateRecorded: req.body.dateRecorded,

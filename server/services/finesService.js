@@ -4,7 +4,8 @@ exports.create = function (req, res, callback){
     db.Fines.create({
         fineDate: req.body.fineDate,
         fineCategory: req.body.fineCategory,
-        fineAmount: req.body.fineAmount
+        fineAmount: req.body.fineAmount,
+        comment: req.body.comment
     })
     .success(function (fine){
         if (callback){

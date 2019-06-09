@@ -3,8 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Chama = sequelize.define('Chama', {
     country: DataTypes.STRING,
     name: DataTypes.STRING,
-    loan: DataTypes.STRING,
-    riskApetite: DataTypes.INTEGER
+    riskApetite: DataTypes.FLOAT
   }, {});
   Chama.associate = function(models) {
     // associations can be defined here
@@ -12,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     Chama.hasMany(models.Goal)
     Chama.hasMany(models.Portfolio)
     Chama.hasMany(models.GroupAccounts)
+    Chama.hasMany(models.Poll)
   };
   return Chama;
 };
