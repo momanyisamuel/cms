@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('app', ['app.controllers','app.services', 'ngRoute'])
+
 .config(function ($routeProvider){
     $routeProvider
     .when('/', {
@@ -97,7 +98,7 @@ angular.module('app', ['app.controllers','app.services', 'ngRoute'])
 
     .when('/newpoll', {
         templateUrl: '/views/partials/newpoll.html',
-        controller: 'PollNewCtrl'})
+        controller: 'pollNewCtrl'})
     .otherwise({
         redirectTo: '/'
     })

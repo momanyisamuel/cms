@@ -28,65 +28,66 @@
         <div class="main-content">
             <div class="data-section">
                 <!-- notification -->
-                <!-- <div class="message-card">
-                    <h4> This is a message <span><i class="fa fa-times"></i></span></h4>
-                </div> -->
+                <div id="message" class="message-card">
+                    
+                </div>
                 <div id="riskForm">
                     
                 </div>
 
-                <div class="row">
-                    <div class="row-column">
-                        <div class="summary-card">
-                             <h3>Risk apetite</h3>
-                             <div>
-                                 <p>Your risk Apetite is <span style="color: chartreuse">Medium</span></p>
-                             </div>
-                        </div>
-                    </div>
-                    <div class="row-column">
-                        <div class="summary-card">
-                            <h3>Fines incured </h3>
-                            <div>
-                                <p>$30 fines incurred</p>
+                <div id="show" class="row" ng-if="authenticatedUser.ChamaId != null && authenticatedUser.userStatus == 1">
+                        <div class="row-column">
+                                <div class="summary-card">
+                                    <h3>Risk apetite</h3>
+                                    <div>
+                                        <p>Your risk Apetite is <span style="color: chartreuse">Medium</span></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row-column">
-                        <div class="summary-card">
-                            <h3>Goal summary</h3>
-                            <div>
-                                <p>3 goals completed</p>
+                            <div class="row-column">
+                                <div class="summary-card">
+                                    <h3>Fines incured </h3>
+                                    <div>
+                                        <p>$30 fines incurred</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row-column">
-                        <div class="summary-card">
-                            <h3>Total contributions</h3>
-                            <div>
-                                <p>$30000</p>
+                            <div class="row-column">
+                                <div class="summary-card">
+                                    <h3>Goal summary</h3>
+                                    <div>
+                                        <p>3 goals completed</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <div class="row-column">
+                                <div class="summary-card">
+                                    <h3>Total contributions</h3>
+                                    <div>
+                                        <p>$30000</p>
+                                    </div>
+                                </div>
+                            </div>
                 </div>
                 
                 <!-- chamaa create -->
                 <div class="group-form">
-                        <form id="createChama" ng-submit="createChama">
-                            <div class="form-group">
-                                <label for="name"></label>
-                                <input type="text" value="" ng-model="name" name="name" placeholder="Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="name"></label>
-                                <input type="text" value="" ng-model="country" name="country" placeholder="Country">
-                            </div>
-                             
-                            <div class="form-group">
-                                <button type="submit">Create Chama</button>
-                            </div>
-                            
-                        </form>
+
+                    <form id="createChama" ng-submit="createChama">
+                        <div class="form-group">
+                            <label for="name"></label>
+                            <input type="text" value="" ng-model="name" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="name"></label>
+                            <input type="text" value="" ng-model="country" name="country" placeholder="Country">
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit">Create Chama</button>
+                        </div>
+                    </form>
+
                 </div>
 
             </div>

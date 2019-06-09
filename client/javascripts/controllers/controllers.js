@@ -5,30 +5,72 @@ angular.module('app.controllers', ['app', 'ngResource'])
 
 
 .controller('HomeCtrl', ['$scope','$http','$location', function ($scope, $http, $location){
-    var createChama = function(){
-        var url = 'http://localhost:8000/api/chama'
+    
+    $scope.authenticatedUser = JSON.parse(localStorage.getItem('currentUser'))
+    console.log($scope.authenticatedUser)
 
-        $http.post(url, {
-                name: $scope.name,
-                country: $scope.country,
-            },
-            {
-                headers: { 'Content-Type': 'application/json; charset=UTF-8'
-            }
-        }).then(function(response) { 
-            console.log(response) 
-            $location.url('/members')
-        }).catch(err => console.log(err))
+    if($scope.authenticatedUser.ChamaId === null) {
+
+        let message = `<h4>Hey ${ $scope.authenticatedUser.firstName } You need to create a Chama <span><i class="fa fa-times"></i></span></h4>`
+    
+
+        document.getElementById('message').innerHTML = message
+
+        var createChama = function(){
+            var url = 'http://localhost:8000/api/chama'
+    
+            $http.post(url, {
+                    name: $scope.name,
+                    country: $scope.country,
+                },
+                {
+                    headers: { 'Content-Type': 'application/json; charset=UTF-8'
+                }
+            }).then(function(response) { 
+                console.log(response.data.id) 
+                var localstor = JSON.parse(localStorage.getItem('currentUser'))
+                localstor.ChamaId = response.data.id;
+                console.log(localstor)
+                localStorage.setItem('currentUser', JSON.stringify(localstor));
+
+                var url = 'http://localhost:8000/api/user/edit/'+$scope.authenticatedUser.id
+                $http.put(url, {
+                        ChamaId: response.data.id,
+                        admin: 1
+                    },
+                    {
+                        headers: { 'Content-Type': 'application/json; charset=UTF-8'
+                    }
+                }).then(function(response) { 
+                    console.log(response)
+                }).catch(err => console.log(err))
+                $location.url('/members')
+            }).catch(err => console.log(err))
+        }
+        var form = document.getElementById('createChama')
+        form.addEventListener("submit", createChama)
+
+    } else {    
+        let message = `<h4>Hey ${ $scope.authenticatedUser.firstName } You already belong to  <span><i class="fa fa-times"></i></span></h4>`
+    
+
+        document.getElementById('message').innerHTML = message
+
     }
+    
 
-     var form = document.getElementById('createChama')
-    form.addEventListener("submit", createChama)
+
+
+    
+    
+    
 }])
 
 .controller('riskCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
 
     var user = JSON.parse(localStorage.getItem('currentUser'))
     $scope.submitRiskForm = function(){
+        console.log("clicked")
         var url = 'http://localhost:8000/api/user/edit/'+user.id
         
         var riskSum = parseInt($scope.answer1)+parseInt($scope.answer2)+parseInt($scope.answer3)+parseInt($scope.answer4)+parseInt($scope.answer5)+parseInt($scope.answer6)+parseInt($scope.answer7)+parseInt($scope.answer8)+parseInt($scope.answer9)+parseInt($scope.answer10)+parseInt($scope.answer11)
@@ -45,7 +87,8 @@ angular.module('app.controllers', ['app', 'ngResource'])
         }
 
         $http.put(url, {
-                riskApetite: userRisk
+                riskApetite: userRisk,
+                admin: 0
             },
             {
                 headers: { 'Content-Type': 'application/json; charset=UTF-8'
@@ -90,26 +133,34 @@ angular.module('app.controllers', ['app', 'ngResource'])
                 password: $scope.password
             }
         }).then(function(response){ 
-            console.log(response.data.userStatus)
+            console.log(response.data)
             if(response.data.userStatus === null){
                 console.log('youre logged in')
                 localStorage.setItem('currentUser',
                     JSON.stringify({
                         token:"tokens",
+                        firstName: response.data.firstName,
                         email:response.data.email, 
                         userStatus:response.data.userStatus, 
                         ChamaId:response.data.ChamaId,
                         id:response.data.id
                     })
                 )
-                $location.url('/risk')
+                if(response.data.riskApetite === null)
+                {
+                    $location.url('/risk')
+                } else {
+                    $location.url('/')
+                }
             }
+            
             console.log(response.status)
         }).catch(err => console.log(err))
     }
 
     $scope.logout = function () {
         return localStorage.setItem('currentUser', null)
+        
     }
 }])
 
@@ -367,26 +418,5 @@ angular.module('app.controllers', ['app', 'ngResource'])
         console.log(response.data)
         $scope.portfolios = response.data
     }).catch(err=>console.log(err))
-}])
 
-.controller('goalFormCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
-
-    var user = JSON.parse(localStorage.getItem('currentUser'))
-    $scope.submitGoalForm = function(){
-        console.log($scope.answer1)
-        //\ var url = 'http://localhost:8000/api/user/edit/'+user.id
-
-        // $http.put(url, {
-        //         riskApetite: $scope.answer1
-        //     },
-    //         {
-    //             headers: { 'Content-Type': 'application/json; charset=UTF-8'
-    //         }
-    //     }).then(function(response) { 
-    //         console.log(response) 
-    //         $location.url('/')
-    //     }).catch(err => console.log(err))
-    // 
-}
-    
 }]);
