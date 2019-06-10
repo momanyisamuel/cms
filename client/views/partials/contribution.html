@@ -27,42 +27,66 @@
         <div class="main-content">
             <div class="data-section">
                 <!-- notification -->
+
                 <div class="message-card">
                     <h4> This is a message <span><i class="fas fa-plus"></i></span></h4>
                 </div>
-                <div class="row">
-                </div>
-                    <div class="auth-form">
-                        <div class="auth-form--title">
-                            <h3>Add your contribution below</h3><br>
-                            <div class="auth-form--body">
-                            <form id="contributionForm" ng-submit="contributionForm()">
-                                <div class="form-group">
-                                    <label for="contributionDate">Date contributed:</label>
-                                    <input ng-model="contributionDate" type="text" class="form-control" id="depositDate" placeholder="dd/mm/yyyy"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="payRefNumber">Payment Reference Number:</label>
-                                    <input ng-model="payRefNumber" type="text" class="form-control" id="payRefNumber" placeholder="MPESA REF"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="contributionAmount">Amount contributed:</label>
-                                    <input ng-model="contributionAmount" type="text" class="form-control" id="depositAmount" placeholder="Amount"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="fundAssignment">Purpose of funds:</label>
-                                    <input ng-model="fundAssignment" type="text" class="form-control" id="fundAssignment" placeholder="contribution"/>
-                                </div>
-                                <div class="form-group">
-                                    <label for="comment">comment </label>
-                                    <input ng-model="comment" type="text" class="form-control" id="comment" placeholder="Comments"/>
-                                </div>                
-                                <button type="submit" class="btn btn-default">Submit</button>
-                            </form> 
+                 <div class="row">
+                            <div class="row-column">
+                                    <div class="summary-card">
+                                        <div class="auth-form">
+                                            <div class="auth-form--title">
+                                                <h3>Add your contribution below</h3><br>
+                                                <div class="auth-form--body">
+                                                <form id="contributionForm" ng-submit="contributionForm()">
+                                                    <div class="form-group">
+                                                        <label for="contributionDate">Date contributed:</label>
+                                                        <input ng-model="contributionDate" type="text" class="form-control" id="depositDate" placeholder="dd/mm/yyyy"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="payRefNumber">Payment Reference Number:</label>
+                                                        <input ng-model="payRefNumber" type="text" class="form-control" id="payRefNumber" placeholder="MPESA REF"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="contributionAmount">Amount contributed:</label>
+                                                        <input ng-model="contributionAmount" type="text" class="form-control" id="depositAmount" placeholder="Amount"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="fundAssignment">Purpose of funds:</label>
+                                                        <input ng-model="fundAssignment" type="text" class="form-control" id="fundAssignment" placeholder="contribution"/>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="comment">comment </label>
+                                                        <input ng-model="comment" type="text" class="form-control" id="comment" placeholder="Comments"/>
+                                                    </div>                
+                                                    <button type="submit" class="btn btn-default">Submit</button>
+                                                </form> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
-                        </div>
-                    </div>
-                -
+                        <div class="row-column">
+                                <div class="summary-card">
+                                    <h3>My Contributions</h3>
+                                        <table>
+                                            <Tr>
+                                                <th>Payment Date</th>
+                                                <th>Payment Reference</th>
+                                                <th>Amount</th>
+                                                <th>Assignemnt</th>
+                                            </tr>
+                                            <tr ng-repeat="contribution in contributions">
+                                                <td>{{contribution.contributionDate}}</td>
+                                                <td>{{contribution.payRefNumber}}</td>
+                                                <td>{{contribution.contributionAmount}}</td>
+                                                <td>{{contribution.fundAssignment}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>  
+                </div>          
+            </div>    
             </div>
         </div>
     </div>

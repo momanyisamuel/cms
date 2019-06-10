@@ -7,7 +7,10 @@ module.exports = function(sequelize, DataTypes){
       phoneNumber: DataTypes.INTEGER,
       nationalId: DataTypes.STRING,
       email: DataTypes.STRING,
-      userStatus: DataTypes.INTEGER,
+      userStatus: {
+        type: DataTypes.INTEGER,       
+        defaultValue: '0'
+      },
       riskApetite: DataTypes.INTEGER,
       password: DataTypes.STRING,
       admin: {

@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken')
 var config = require('../../config/config')
 
 exports.create = function (req, res){
-    if(!req.body.hasOwnProperty('firstName') || !req.body.hasOwnProperty('password')){
+    if(!req.body.hasOwnProperty('email') || !req.body.hasOwnProperty('password')){
         console.log('Error 400: Post syntax incorrect.');
         res.send(400, 'Error 400: Post syntax incorrect.');
     }
@@ -22,8 +22,12 @@ exports.readAll = function (req, res){
     userService.readAll(req, res);
 };
 
-exports.update = function (req, res){
-    userService.update(req, res);
+exports.updateRiskAppetite = function (req, res){
+    userService.updateRiskAppetite(req, res);
+};
+
+exports.updateChamaId = function (req, res){
+    userService.updateChamaId(req, res);
 };
 
 exports.delete = function (req, res){
@@ -34,9 +38,7 @@ exports.findByEmail = function (req, res) {
         if(!user) { 
             res.send( 500, { error : 'Wrong Email or password'} )
         } else {
-            
             res.send(200, user)
-           
         }
     });
 }

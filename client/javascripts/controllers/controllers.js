@@ -33,7 +33,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
                 console.log(localstor)
                 localStorage.setItem('currentUser', JSON.stringify(localstor));
 
-                var url = 'http://localhost:8000/api/user/edit/'+$scope.authenticatedUser.id
+                var url = 'http://localhost:8000/api/user/editChamaId/'+$scope.authenticatedUser.id
                 $http.put(url, {
                         ChamaId: response.data.id,
                         admin: 1
@@ -71,30 +71,23 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
     var user = JSON.parse(localStorage.getItem('currentUser'))
     $scope.submitRiskForm = function(){
         console.log("clicked")
-        var url = 'http://localhost:8000/api/user/edit/'+user.id
+        var url = 'http://localhost:8000/api/user/editRiskAppetite/'+user.id
         
         var riskSum = parseInt($scope.answer1)+parseInt($scope.answer2)+parseInt($scope.answer3)+parseInt($scope.answer4)+parseInt($scope.answer5)+parseInt($scope.answer6)+parseInt($scope.answer7)+parseInt($scope.answer8)+parseInt($scope.answer9)+parseInt($scope.answer10)+parseInt($scope.answer11)
 
         var userRisk = riskSum/11
         console.log(userRisk)
 
-        if(userRisk >0 && userRisk<1.6 ){
-            console.log('low')
-        }else if(userRisk >1.68 && userRisk<2.35){
-            console.log('medium')
-        }else if(userRisk>2.36 && userRisk<3){
-            console.log('High')
-        }
-
         $http.put(url, {
-                riskApetite: userRisk,
-                admin: 0
+                riskApetite: userRisk
             },
             {
                 headers: { 'Content-Type': 'application/json; charset=UTF-8'
             }
         }).then(function(response) { 
-            console.log(response) 
+            var localstor = JSON.parse(localStorage.getItem('currentUser'))
+            localstor.riskApetite = userRisk;
+            localStorage.setItem('currentUser', JSON.stringify(localstor));
             $location.url('/')
         }).catch(err => console.log(err))
     
@@ -134,16 +127,19 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
             }
         }).then(function(response){ 
             console.log(response.data)
-            if(response.data.userStatus === null){
+            if(response.data.userStatus === 0){
                 console.log('youre logged in')
                 localStorage.setItem('currentUser',
                     JSON.stringify({
                         token:"tokens",
                         firstName: response.data.firstName,
+                        lastName: response.data.lastName,
                         email:response.data.email, 
                         userStatus:response.data.userStatus, 
+                        phoneNumber: response.data.phoneNumber,
                         ChamaId:response.data.ChamaId,
-                        id:response.data.id
+                        id:response.data.id,
+                        riskApetite:response.data.riskApetite
                     })
                 )
                 if(response.data.riskApetite === null)
@@ -158,13 +154,15 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
         }).catch(err => console.log(err))
     }
 
-    $scope.logout = function () {
-        return localStorage.setItem('currentUser', null)
-        
-    }
+    // $scope.logout = function () {
+    //     return localStorage.setItem('currentUser', null)
+    // }
 }])
 
 .controller('contributionCtrl',  ['$scope','$http','$location', function ($scope, $http, $location){
+
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    console.log(user.id)
     var contributionForm = function(){
         var url = 'http://localhost:8000/api/contribution'
 
@@ -173,20 +171,41 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
             payRefNumber: $scope.payRefNumber,
             contributionAmount: $scope.contributionAmount,
             fundAssignment: $scope.fundAssignment,
-            comment: $scope.comment
+            comment: $scope.comment,
+            UserId: user.id
             },
             {
                 headers: { 'Content-Type': 'application/json; charset=UTF-8'
             }
         }).then(function(response) { 
             console.log(response) 
-            $location.url('/members')
+            window.location.href = "http://localhost:8000/#/members"
         }).catch(err => console.log(err))
     }
 
      var form = document.getElementById('contributionForm')
     form.addEventListener("submit", contributionForm)
-}])
+
+    
+
+    $http.get('http://localhost:8000/api/contribution').then((response)=>{
+        console.log(response.data)
+        let contribute = response.data
+        $scope.contributions = []
+        contribute.forEach(element => {
+            console.log(element)
+            if(element.UserId === user.id)
+            {
+                $scope.contributions.push(element)
+                console.log($scope.contributions)
+            } else {
+                console.log('No Contributions yet.')
+            }
+        });
+        
+    }).catch(err => console.log(err))
+}
+])
 
 .controller('withdrawalsCtrl', ['$scope', '$http', function ($scope, $http){ 
     $scope.welcome = 'Welcome to the withdrawals page';
@@ -215,10 +234,26 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
     form.addEventListener("submit", fineMember)
 }])
 
-.controller('loansCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the LOANS page';
+.controller('loansCtrl',['$scope', '$http', '$location', function ($scope, $http,$location){
+  
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
+    $http.get('http://localhost:8000/api/loan').then((response)=>{
+        console.log(response.data)
+        let loansTaken = response.data
+        $scope.loaned = []
+        loansTaken.forEach(element => {
+            console.log(element)
+            if(element.UserId === user.id)
+            {
+                $scope.loaned.push(element)
+                console.log($scope.loaned)
+            } else {
+                console.log('No Loans yet.')
+            }
+        })
+    });
 }])
-
 .controller('invitesCtrl', ['$scope', '$http', '$location', function ($scope, $http, $location){
     $scope.accept = function(){
         var url = 'http://localhost:8000/api/acceptinvite'
@@ -246,10 +281,9 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 .controller('membersCtrl', ['$scope', '$http', '$location', function ($scope, $http,$location){
   
     var user = JSON.parse(localStorage.getItem('currentUser'))
-    
+    $scope.user = user
     $scope.sendInvite = function() {
         var url = 'http://localhost:8000/invite/user/'+user.ChamaId
-
         $http.post(url, {
                 email: $scope.inviteEmail
             },
@@ -260,6 +294,18 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
             console.log(response) 
             $location.url('/members')
         }).catch(err => console.log(err))
+    }
+    console.log(user.phoneNumber)
+    if(user.riskApetite >0 && user.riskApetite<1.6 ){
+        console.log(user.riskApetite)
+        $scope.riskName = 'LOW'
+    }else if(user.riskApetite >1.68 && user.riskApetite<2.35){
+        console.log('medium')
+        $scope.riskName = 'MEDIUM'   
+    }else if(user.riskApetite>2.36 && user.riskApetite<=3){
+        console.log('High')
+        $scope.riskName = 'HIGH'
+
     }
     // var form = document.getElementById('inviteForm')
     // form.addEventListener("submit", $scope.sendInvite)
@@ -423,3 +469,4 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
     }).catch(err=>console.log(err))
 
 }]);
+

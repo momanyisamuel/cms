@@ -13,7 +13,8 @@ exports = module.exports = function (app, passport){
     app.get('/api/user', routes.user.readAll);
     app.post('/api/user', routes.user.create);
     app.get('/api/user/:id', routes.user.read);
-    app.put('/api/user/edit/:id', routes.user.update);
+    app.put('/api/user/editChamaId/:id', routes.user.updateChamaId);
+    app.put('/api/user/editRiskAppetite/:id', routes.user.updateRiskAppetite);
     app.get('/api/user/delete/:id', routes.user.delete);
 
     //chamas
