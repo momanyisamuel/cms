@@ -32,52 +32,69 @@
                 </div>
                 
                 <div class="row">
-                    <div class=".row-column">
+                    <div class="row-column">
                         <div class="summary-card">
                             <h3>My Profile</h3>
                             <div>
                                 <table>
                                     <tr>
-                                        <th>Name: </th>
+                                        <th>Name: {{user.firstName}}</th>
                                     </tr>
                                     <tr>
-                                        <th>Email: </th>
+                                        <th>Email: {{user.email}} </th>
                                     </tr>
                                     <tr>
-                                        <th>Tel: </th>
+                                        <th>Tel: {{user.phoneNumber}} </th>
                                     </tr>
                                     </tr>
                                 </table> 
-                                <p>Your risk Rating is <span style="color:crimson">High</span></p>
+                                <p>Your risk Rating is <span style="color:crimson">{{riskName}}</span></p>
                             </div>
                         
+                        </div>
                     
-                    <div class=".row-column">
+                    </div>
+                    <div class="row-column">
                         <div class="summary-card">
                             <h4>Total Member</h4>
                             <div>
-                                <p>Your Chama has <span style="color: chartreuse">8</span> members</p>
+                                <p>Your Chama has <span style="color: chartreuse">8</span> Active Members</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                <div class="row-column">
+                        <div class="summary-card">
+                            <div class="invites">
+                                <h3>Send invites</h3><br>
+                                <div class="invite-form">
+                                    <form id="inviteForm" name="inviteForm" ng-submit="sendInvite()">
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="text" placeholder="email@email.com" ng-model="inviteEmail">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit">Send Invites</button>
+                                        </div>
+                                    </form>
+                                </div>                
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="invites">
-                    <h3>Send invites</h3><br>
-                    <div class="invite-form">
-                        <form id="inviteForm" name="inviteForm" ng-submit="sendInvite()">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="text" placeholder="email@email.com" ng-model="inviteEmail">
+                <br><br><br><br><br><br>
+                <div class="row">
+                        <div class="row-column">
+                            <div class="summary-card">
+                                <h3>Chamaa Members</h3>
+                                <ul>
+                                    <li>1. Karanja Wanjau</li>
+                                    <li>2. Bonface Ngare</li>
+                                </ul>
                             </div>
-                            <div class="form-group">
-                                <button type="submit">Send Invites</button>
-                            </div>
-                        </form>
-                    </div>
-                    </div>
-                    </div>
+                        </div>
                 </div>
+
                 <!-- polls -->
             </div>
         </div>

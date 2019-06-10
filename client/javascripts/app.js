@@ -98,7 +98,7 @@ angular.module('app', ['app.controllers','app.services', 'ngRoute'])
 
     .when('/newpoll', {
         templateUrl: '/views/partials/newpoll.html',
-        controller: 'pollNewCtrl'})
+        controller: 'PollNewCtrl'})
     .otherwise({
         redirectTo: '/'
     })

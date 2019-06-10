@@ -33,12 +33,49 @@
                     <h4> This is a message <span><i class="fas fa-plus"></i></span></h4>
                 </div>
                 <div class="row">
-                    <div class="row-column">
-                        <h4>Request for a loan from your chamaa</h4>
+                <div class="row-column">
+                        <div class="summary-card">
+                            <div class="loanRequests">
+                                <h3>Request for a Loan</h3><br>
+                                <div class="loan-form">
+                                    <form id="loanForm" name="loanForm" ng-submit="askLoan()">
+                                        <div class="form-group">
+                                            <label id="loanQn" >Loan Request</label>
+                                            <input type="text" placeholder="Loan Reason" ng-model="loanQn">
+                                            <label id="loanAmount" >Loan Amount</label>
+                                            <input type="text" placeholder="Loan Amount Kshs." ng-model="loanAmount">
+                                            <label id="loanDuration" >Loan Duration</label>
+                                            <input type="text" placeholder="Loan Duration" ng-model="loanDuration">
+                                            <label id="loanRate" >Loan Rate</label>
+                                            <input type="text" placeholder="rate %" ng-model="loanRate">
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit">Send Request</button>
+                                        </div>
+                                    </form>
+                                </div>                
+                            </div>
+                        </div>
                     </div>
+
                     <div class="row-column">
-                        <h4>Loan Details</h4>
-                    </div>
+                            <div class="summary-card">
+                                <div class="LoansPending">
+                                    <h3>Outstanding Loans</h3><br>
+                                    <table>
+                                        <Tr>
+                                            <th>Loan Amount</th>
+                                            <th>Loan Duration</th>
+                                            <th>Rate %</th>
+                                        </tr>
+                                        <tr ng-repeat="loan in loans">
+                                            <td>{{loans.loanAmount}}</td>
+                                            <td>{{loans.loanDuration}}</td>
+                                            <td>{{loans.loanRate}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                </div>                    </div>
                 </div>
                 <!-- polls -->
             </div>
