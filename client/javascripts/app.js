@@ -109,6 +109,13 @@ angular.module('app', ['app.controllers', 'ngRoute'])
     .otherwise({
         redirectTo: '/'
     })
+
+    .when('/goalsetting', {
+        templateUrl: '/views/partials/goalsetting.html',
+        controller: 'goalFormCtrl'})
+    .otherwise({
+        redirectTo: '/'
+    })
     ;
 })
 .run(function (){
