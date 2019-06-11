@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('app', ['app.controllers','app.services', 'ngRoute'])
+angular.module('app', ['app.controllers', 'ngRoute'])
 
-.config(function ($routeProvider){
+.config(function ($routeProvider,$locationProvider){
     $routeProvider
     .when('/', {
         templateUrl: '/views/partials/home.html',
@@ -115,8 +115,9 @@ angular.module('app', ['app.controllers','app.services', 'ngRoute'])
         controller: 'goalFormCtrl'})
     .otherwise({
         redirectTo: '/'
-    })
-    ;
+    });
+    $locationProvider.hashPrefix(''); 
+    $locationProvider.html5Mode(true);
 })
 .run(function (){
 

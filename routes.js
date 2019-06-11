@@ -4,6 +4,54 @@ exports = module.exports = function (app, passport){
     app.get('/', function(req, res){
         res.render('index');
     });
+    app.get('/contribution', function(req, res){
+        res.render('index');
+    });
+    app.get('/withdrawals', function(req, res){
+        res.render('index');
+    });
+    app.get('/loans', function(req, res){
+        res.render('index');
+    });
+    app.get('/members', function(req, res){
+        res.render('index');
+    });
+    app.get('/fines', function(req, res){
+        res.render('index');
+    });
+    app.get('/portfolioview', function(req, res){
+        res.render('index');
+    });
+    app.get('/reports', function(req, res){
+        res.render('index');
+    });
+    app.get('/register', function(req, res){
+        res.render('index');
+    });
+    app.get('/login', function(req, res){
+        res.render('index');
+    });
+    app.get('/risk', function(req, res){
+        res.render('index');
+    });
+    app.get('/listpolls', function(req, res){
+        res.render('index');
+    });
+    app.get('/polldetails/:id', function(req, res){
+        res.render('index');
+    });
+    app.get('/newpoll', function(req, res){
+        res.render('index');
+    });
+    app.get('/acceptinvites', function(req, res){
+        res.render('index');
+    });
+    app.get('/portfolio', function(req, res){
+        res.render('index');
+    });
+
+    
+    
     
     app.get('/api/login', routes.user.findByEmail)
     app.post('/invite/user/:ChamaId', routes.user.sendInvites)

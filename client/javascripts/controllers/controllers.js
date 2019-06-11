@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.controllers', ['app', 'ngResource'])
+angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 
 
 
@@ -11,7 +11,7 @@ angular.module('app.controllers', ['app', 'ngResource'])
 
     if($scope.authenticatedUser.ChamaId === null) {
 
-        let message = `<h4>Hey ${ $scope.authenticatedUser.firstName } You need to create a Chama <span><i class="fa fa-times"></i></span></h4>`
+        let message = `<div class="alert alert-info" role="alert">Hey ${ $scope.authenticatedUser.firstName } You need to create a Chama <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
     
 
         document.getElementById('message').innerHTML = message
@@ -51,19 +51,10 @@ angular.module('app.controllers', ['app', 'ngResource'])
         form.addEventListener("submit", createChama)
 
     } else {    
-        let message = `<h4>Hey ${ $scope.authenticatedUser.firstName } You already belong to  <span><i class="fa fa-times"></i></span></h4>`
+        let message = `<div class="alert alert-warning">${ $scope.authenticatedUser.firstName } You already belong to  a chama <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
     
-
         document.getElementById('message').innerHTML = message
-
-    }
-    
-
-
-
-    
-    
-    
+    }   
 }])
 
 .controller('riskCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
@@ -154,9 +145,9 @@ angular.module('app.controllers', ['app', 'ngResource'])
         }).catch(err => console.log(err))
     }
 
-    // $scope.logout = function () {
-    //     return localStorage.setItem('currentUser', null)
-    // }
+    $scope.logout = function () {
+        return localStorage.setItem('currentUser', null)
+    }
 }])
 
 .controller('contributionCtrl',  ['$scope','$http','$location', function ($scope, $http, $location){
@@ -360,28 +351,31 @@ angular.module('app.controllers', ['app', 'ngResource'])
 }])
 
 // Controller for an individual poll
-.controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http' , function ($scope, $routeParams, $http) {	
-    
-    
-	$http.get('http://localhost:8000/api/poll/'+$routeParams.id).then((response)=>{
-        console.log(response.data)
-        $scope.poll = response.data
-    }).catch(err=>console.log(err))
+.controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http','socket','Poll' , function ($scope, $routeParams, $http, socket, Poll) {	
+    socket.on('init', function (data){
+        console.log('hello')
+    });
 
-	// socket.on('myvote', function(data) {
-	// 	console.dir(data);
-	// 	if(data._id === $routeParams.pollId) {
-	// 		$scope.poll = data;
-	// 	}
-	// });
+    $scope.poll = Poll.get({pollId: $routeParams.id});
+	// $http.get('http://localhost:8000/api/poll/'+$routeParams.id).then((response)=>{
+    //     console.log(response.data)
+    //     $scope.poll = response.data
+    // }).catch(err=>console.log(err))
+
+	socket.on('myvote', function(data) {
+		console.log(data);
+		if(data.id === $routeParams.id) {
+			$scope.poll = data;
+		}
+	});
 	
-	// socket.on('vote', function(data) {
-	// 	console.dir(data);
-	// 	if(data._id === $routeParams.pollId) {
-	// 		$scope.poll.choices = data.choices;
-	// 		$scope.poll.totalVotes = data.totalVotes;
-	// 	}		
-	// });
+	socket.on('vote', function(data) {
+		console.dir(data);
+		if(data.id === $routeParams.id) {
+			$scope.poll.choices = data.choices;
+			$scope.poll.totalVotes = data.totalVotes;
+		}		
+	});
 	
 	$scope.vote = function() {
 		var pollId = $scope.poll.id,
@@ -389,7 +383,7 @@ angular.module('app.controllers', ['app', 'ngResource'])
 		
 		if(choiceId) {
 			var voteObj = { poll_id: pollId, choice: choiceId };
-			// socket.emit('send:vote', voteObj);
+			socket.emit('send:vote', voteObj);
 		} else {
 			alert('You must select an option to vote for');
 		}
@@ -464,6 +458,31 @@ angular.module('app.controllers', ['app', 'ngResource'])
         console.log(response.data)
         $scope.portfolios = response.data
     }).catch(err=>console.log(err))
+
+    var portfolioForm = function(){
+        var url = 'http://localhost:8000/api/portfolio'
+
+        $http.post(url, {
+                name: $scope.assetName,
+                category: $scope.assetCategory,
+                assetFlag: $scope.assetFlag,
+                description: $scope.assetDescription,
+                amount: $scope.assetAmount,
+                dateRecorded: $scope.dateRecorded,
+                refDetails: $scope.refDetails,
+                comment: $scope.comment
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/portfolioview')
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('portfolioForm')
+    form.addEventListener("submit", portfolioForm)
 
 }]);
 

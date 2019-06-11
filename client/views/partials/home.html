@@ -1,9 +1,7 @@
 <div class="main-section">           
     <div class="sidebar">
         <ul class="sidebar-menu">
-            <div class="sidebar-title">
-                <li><a href="#"><span style="font-weight: bold">Home</span></a></li>
-            </div>
+            
             <!-- display if user is in a group  -->
             <li><a href="#/contribution">Contribution</a></li>
             <li><a href="#/withdrawals">Withdrawals</a></li>
@@ -25,16 +23,46 @@
         </div>
         
         <div class="main-content">
+            <br>
             <div class="data-section">
                 <!-- notification -->
-                <div id="message" class="message-card">
-                    
+                <div id="message">
                 </div>
-                <div id="riskForm">
-                    
+                <!-- <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                        <div class="caption">
+                            <h3>Thumbnail label</h3>
+                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                        <div class="caption">
+                            <h3>Thumbnail label</h3>
+                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                        <div class="caption">
+                            <h3>Thumbnail label</h3>
+                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                        <div class="caption">
+                            <h3>Thumbnail label</h3>
+                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+                        </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div id="show" class="row" ng-if="authenticatedUser.ChamaId != null && authenticatedUser.userStatus == 1">
+                <div id="show" class="row" ng-if="authenticatedUser.ChamaId != null && authenticatedUser.userStatus == null">
                         <div class="row-column">
                                 <div class="summary-card">
                                     <h3>Risk apetite</h3>
@@ -67,26 +95,24 @@
                                     </div>
                                 </div>
                             </div>
-                </div>
+                </div> -->
                 
                 <!-- chamaa create -->
-                <div class="group-form">
-                    <form id="createChama" ng-submit="createChama">
-                        <div class="form-group">
-                            <label for="name"></label>
-                            <input type="text" value="" ng-model="name" name="name" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="name"></label>
-                            <input type="text" value="" ng-model="country" name="country" placeholder="Country">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit">Create Chama</button>
-                        </div>
-                    </form>
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <form id="createChama" ng-submit="createChama" class="form-inline">
+                            <div class="form-group">
+                                <label for="name" class="sr-only"></label>
+                                <input type="text" class="form-control" value="" ng-model="name" name="name" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="sr-only"></label>
+                                <input type="text" class="form-control" value="" ng-model="country" name="country" placeholder="Country">
+                            </div>
+                            <button type="submit" class="btn btn-default">Create Chama</button>
+                        </form>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
