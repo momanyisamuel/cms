@@ -152,7 +152,9 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 
 .controller('contributionCtrl',  ['$scope','$http','$location', function ($scope, $http, $location){
 
+    
     var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
     console.log(user.id)
     var contributionForm = function(){
         var url = 'http://localhost:8000/api/contribution'
@@ -199,10 +201,60 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 ])
 
 .controller('withdrawalsCtrl', ['$scope', '$http', function ($scope, $http){ 
-    $scope.welcome = 'Welcome to the withdrawals page';
-}])
+     
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
+    console.log(user.id)
+    var withdrawalForm = function(){
+        var url = 'http://localhost:8000/api/withdrawal'
+
+        $http.post(url, {
+            withdrawalDate: $scope.withdrawalDate,
+            withdrawRefNumber: $scope.withdrawRefNumber,
+            withdrawalAmount: $scope.withdrawalAmount,
+            paymentPurpose: $scope.paymentPurpose,
+            comment: $scope.comment,
+            UserId: user.id
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            window.location.href = "http://localhost:8000/#/members"
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('withdrawalForm')
+    form.addEventListener("submit", withdrawalForm)
+
+    
+
+    $http.get('http://localhost:8000/api/withdrawal').then((response)=>{
+        console.log(response.data)
+        let withdrawn = response.data
+        $scope.withdrawals = []
+        withdrawn.forEach(element => {
+            console.log(element)
+            if(element.UserId === user.id)
+            {
+                $scope.withdrawals.push(element)
+                console.log($scope.withdrawals)
+            } else {
+                console.log('No Withdrawals yet.')
+            }
+        });
+        
+    }).catch(err => console.log(err))
+}
+])
+
 
 .controller('finesCtrl',  ['$scope','$http','$location', function ($scope, $http, $location){
+    
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
+
     var fineMember = function(){
         var url = 'http://localhost:8000/api/fine'
 
@@ -226,9 +278,30 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 }])
 
 .controller('loansCtrl',['$scope', '$http', '$location', function ($scope, $http,$location){
-  
     var user = JSON.parse(localStorage.getItem('currentUser'))
     $scope.user = user
+    console.log(user.id)
+    var loanForm = function(){
+        var url = 'http://localhost:8000/api/loan'
+
+        $http.post(url, {
+            loanAmount: $scope.loanAmount,
+            loanDuration: $scope.loanDuration,
+            loanRate: $scope.loanRate,
+            UserId: user.id
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            window.location.href = "http://localhost:8000/#/members"
+        }).catch(err => console.log(err))
+    }
+
+     var form = document.getElementById('loanForm')
+    form.addEventListener("submit", loanForm)
+
     $http.get('http://localhost:8000/api/loan').then((response)=>{
         console.log(response.data)
         let loansTaken = response.data
@@ -332,18 +405,30 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 
 
 .controller('votesCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the votes page';
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
 }])
 
 .controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the reports page';
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
 }])
+
+.controller('PortfolioViewCtrl', ['$scope', '$http', function ($scope, $http){
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
+}])
+
 .controller('pollCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the reports page';
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
 }])
 
 // Controller for the poll list
 .controller('PollListCtrl', ['$scope' ,'$http',function ($scope, $http) {
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
+
     $http.get('http://localhost:8000/api/poll').then((response)=>{
         console.log(response.data)
         $scope.polls = response.data
@@ -352,6 +437,9 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 
 // Controller for an individual poll
 .controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http','socket','Poll' , function ($scope, $routeParams, $http, socket, Poll) {	
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
+   
     socket.on('init', function (data){
         console.log('hello')
     });
@@ -454,12 +542,17 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 
 // Controller for the portfolio list
 .controller('PortfolioListCtrl', ['$scope' ,'$http',function ($scope, $http) {
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
     $http.get('http://localhost:8000/api/portfolio').then((response)=>{
         console.log(response.data)
         $scope.portfolios = response.data
     }).catch(err=>console.log(err))
 
     var portfolioForm = function(){
+        var user = JSON.parse(localStorage.getItem('currentUser'))
+        $scope.user = user
+
         var url = 'http://localhost:8000/api/portfolio'
 
         $http.post(url, {

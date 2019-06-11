@@ -3,8 +3,9 @@ var db = require('../models');
 exports.create = function (req, res, callback){
     db.Loans.create({
         loanAmount: req.body.loanAmount,
-        duration: req.body.duration,
-        interestRate: req.body.interestRate
+        loanDuration: req.body.loanDuration,
+        loanRate: req.body.loanRate,
+        UserId: req.body.UserId  
     })
     .success(function (loan){
         if (callback){
