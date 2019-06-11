@@ -1,13 +1,11 @@
 <div class="main-section">           
     <div class="sidebar">
         <ul class="sidebar-menu">
-            <div>
-                <li><a href="#"><span style="font-weight: bold">Portfolio</span></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="">-------</a></li>
+            <div class="sidebar-title">
+                <li><a href="#"><span style="font-weight: bold"></span></a></li>
             </div>
             <!-- display if user is in a group  -->
-            <li><a href="#/contribution">contribution</a></li>
+            <li><a href="#/contribution">Contribution</a></li>
             <li><a href="#/withdrawals">Withdrawals</a></li>
             <li><a href="#/loans">Loans</a></li>
             <li><a href="#/members">Members</a></li>
@@ -21,29 +19,98 @@
             <p><i class="far fa-user-circle"></i> John Doe</p>
         </div>
     </div>
-    <div class="inner-section">
-            <div class="inner-bar">
-                <div class="inner-bar--title">
-                    <h2>Asset and Liabilities</h2>
-                </div>
-                <ul class="inner-bar--nav">
-                    <li><a href="#/portfolio"><i class="fas fa-plus"></i> add to portfolio</a></li>
-                </ul>
-            </div>
-            
-            <div class="main-content">
+    <div class="inner-section">            
+        <div class="main-content">
             <div class="data-section">
                 <!-- notification -->
                 <div class="message-card">
-                    <h4> This are your chamaa's asset/liabilities<span><i class="fas fa-plus"></i></span></h4>
                 </div>
                 
-                <div class="assetlist" ng-repeat="portfolio in portfolios">
-                    <li><a href="#">{{portfolio.name}}</a></li>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Summary Member reports</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form id="portfolioForm" ng-submit="portfolioForm()">
+                                    <div class="form-group">
+                                    <label for="name">Asset/Liability Name:</label>
+                                        <input ng-model="assetName" type="text" class="form-control" id="name" placeholder="Item Name"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="category">Item Category:</label>
+                                        <input ng-model="assetCategory" type="text" class="form-control" id="category" placeholder="Land,vehicle,property,business"/>
+                                    </div>
+                                    <h4>Is this an Asset?:</h4>
+                                    <div class="radio">
+                                            
+                                        <label for="assetFlag">
+                                            <input ng-model="assetFlag" type="radio" id="assetFlag" name="Yes" value="1"/>
+                                            yes
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                            
+                                        <label for="assetFlag2">
+                                            <input ng-model="assetFlag" type="radio"  id="assetFlag2" name="No" value="2"/>
+                                            No
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Item description:</label>
+                                        <input ng-model="assetDescription" type="text" class="form-control" id="description" placeholder="Details of the item"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="amount">Cost of Item:</label>
+                                        <input ng-model="assetAmount" type="text" class="form-control" id="amount" placeholder="Amount"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dateRecorded">Date Purchased:</label>
+                                        <input ng-model="dateRecorded" type="text" class="form-control" id="dateRecorded" placeholder="dd/mm/yyyy"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="refDetails">Payment/item Reference Number:</label>
+                                        <input ng-model="refDetails" type="text" class="form-control" id="refDetails" placeholder="Reference"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="comment">comment </label>
+                                        <input ng-model="comment" type="text" class="form-control" id="comment" placeholder="Comments"/>
+                                    </div>                
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">This are your chamaa's asset/liabilities</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="portfolio in portfolios">
+                                            <td>{{portfolio.name}}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            </div>
-    </div>
-    </div>
+        </div>
     </div>
 </div>

@@ -1,5 +1,4 @@
-// imports
-@import 'type'
+
     
 // mixins
 @mixin karla 
@@ -24,7 +23,6 @@ input
     @include karla
     color: #aaa
     border: solid 1px #ccc
-    margin: 0 0 20px
     width: 300px
     -webkit-border-radius: 3px
     -moz-border-radius: 3px
@@ -85,6 +83,7 @@ label, input
 .top-bar--nav
     display: flex
     padding: 0 40px
+    margin-top: 27px
     li
         margin-left: 20px
 
@@ -100,7 +99,7 @@ label, input
         .sidebar-title
             margin-bottom: 10px
         .sidebar-user
-            padding: 20px 30px
+            padding: 20px 20px
         .sidebar-menu  
             display: block
             padding: 20px 20px
@@ -143,12 +142,3 @@ label, input
     flex-direction: row
     justify-content: space-between
     border-bottom: 1px solid #EFEFEF
-.radio
-    display: flex
-    padding-bottom: 1rem
-    h4,input,label
-        margin: 0
-    input,label
-        margin-left: 1rem
-    input
-        width: 3rem

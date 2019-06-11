@@ -1,22 +1,33 @@
-<div class="auth-form">
-    <div class="auth-form--title">
-      <h3>Login to Your Chamaa Below</h3>  
-    </div>
-    <div class="auth-form--body">
-        <form name="loginForm" ng-submit="submitLoginForm()">
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="text" ng-model="email" name="email" placeholder="Email Address">
+
+<div style="margin-top: 120px"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header" style="text-align: center; margin-top: 0;">
+                        <h2>Login to Your FCMS Account Below</h2>
+                        <h3><small>Sign in with your email address.</small></h3>
+                    </div>
+                    <div class="">
+                        <form name="loginForm" ng-submit="submitLoginForm()">
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="text" ng-model="email" class="form-control" name="email" placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" ng-model="password" class="form-control" name="password" placeholder="password">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit">Login</button>
+                                <a href="#/register">Or Register</a>
+                            </div>
+                            <div class="form-group"></div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" ng-model="password" name="password" placeholder="password">
-            </div>
-            <div class="form-group">
-                <button type="submit">Login</button>
-                <a href="#/register">Or Register</a>
-            </div>
-            <div class="form-group"></div>
-        </form>
+        </div>
     </div>
 </div>

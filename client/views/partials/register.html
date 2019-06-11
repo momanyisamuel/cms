@@ -1,37 +1,50 @@
-<div class="main-content">
-    <div class="auth-form">
-        <div class="auth-form--title">
-            <h3>Register to join create/join your chamaa</h3>
-        </div>
 
-        <div class="auth-form--body">
-            <form name="userForm" ng-submit="submitUserForm()">
-                <div class="form-group">
-                    <label for="firstname">FirstName:</label>
-                    <input ng-model="firstName" type="text" class="form-control" id="firstName" placeholder="Enter FirstName"/>
+
+<div style="margin-top: 90px"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="page-header"style="text-align: center; margin-top: 0;">
+                        <h2>Register for a FCMS Account Below</h2>
+                        <h3><small>Sign up with your personal details.</small></h3>
+                    </div>
+                    <div class="">
+                        <form name="userForm" ng-submit="submitUserForm()">
+                            <div class="form-group">
+                                <label for="firstname">FirstName:</label>
+                                <input ng-model="firstName" type="text" class="form-control" id="firstName" placeholder="Enter FirstName"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">LastName:</label>
+                                <input ng-model="lastName" type="text" class="form-control" id="lastName" placeholder="Enter LastName"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Email:</label>
+                                <input ng-model="email" type="text" class="form-control" id="email" placeholder="Enter LastName"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Phone Number:</label>
+                                <input ng-model="phoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="Enter phoneNumber"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">national Id</label>
+                                <input ng-model="nationalId" type="text" class="form-control" id="nationalId" placeholder="Enter national id"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Password:</label>
+                                <input ng-model="password" type="password" class="form-control" id="password" placeholder="Enter LastName"/>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit">Register</button>
+                                <a href="#/login">Or Login</a>
+                            </div>
+                            
+                        </form> 
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="lastname">LastName:</label>
-                    <input ng-model="lastName" type="text" class="form-control" id="lastName" placeholder="Enter LastName"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Email:</label>
-                    <input ng-model="email" type="text" class="form-control" id="email" placeholder="Enter LastName"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Phone Number:</label>
-                    <input ng-model="phoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="Enter phoneNumber"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">national Id</label>
-                    <input ng-model="nationalId" type="text" class="form-control" id="nationalId" placeholder="Enter national id"/>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Password:</label>
-                    <input ng-model="password" type="password" class="form-control" id="password" placeholder="Enter LastName"/>
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form> 
+            </div>
         </div>
     </div>
 </div>

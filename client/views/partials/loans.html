@@ -1,13 +1,11 @@
 <div class="main-section">           
     <div class="sidebar">
         <ul class="sidebar-menu">
-            <div>
-                <li><a href="#"><span style="font-weight: bold">Loans</span></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="">-------</a></li>
+            <div class="sidebar-title">
+                <li><a href="#"><span style="font-weight: bold"></span></a></li>
             </div>
             <!-- display if user is in a group  -->
-            <li><a href="#/contribution">contribution</a></li>
+            <li><a href="#/contribution">Contribution</a></li>
             <li><a href="#/withdrawals">Withdrawals</a></li>
             <li><a href="#/loans">Loans</a></li>
             <li><a href="#/members">Members</a></li>
@@ -23,9 +21,7 @@
     </div>
     <div class="inner-section">
         <div class="top-bar">
-            
         </div>
-        
         <div class="main-content">
             <div class="data-section">
                 <!-- notification -->
@@ -33,51 +29,61 @@
                     <h4> This is a message <span><i class="fas fa-plus"></i></span></h4>
                 </div>
                 <div class="row">
-                <div class="row-column">
-                        <div class="summary-card">
-                            <div class="loanRequests">
-                                <h3>Request for a Loan</h3><br>
-                                <div class="loan-form">
-                                    <form id="loanForm" name="loanForm" ng-submit="askLoan()">
-                                        <div class="form-group">
-                                            <label id="loanQn" >Loan Request</label>
-                                            <input type="text" placeholder="Loan Reason" ng-model="loanQn">
-                                            <label id="loanAmount" >Loan Amount</label>
-                                            <input type="text" placeholder="Loan Amount Kshs." ng-model="loanAmount">
-                                            <label id="loanDuration" >Loan Duration</label>
-                                            <input type="text" placeholder="Loan Duration" ng-model="loanDuration">
-                                            <label id="loanRate" >Loan Rate</label>
-                                            <input type="text" placeholder="rate %" ng-model="loanRate">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit">Send Request</button>
-                                        </div>
-                                    </form>
-                                </div>                
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Request for a Loan</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form id="loanForm" name="loanForm" ng-submit="askLoan()">
+                                    <div class="form-group">
+                                        <label id="loanQn" >Loan Request</label>
+                                        <input type="text"  class="form-control" placeholder="Loan Reason" ng-model="loanQn">
+                                    </div>
+                                    <div class="form-group">
+                                        <label id="loanAmount" >Loan Amount</label>
+                                        <input type="text" class="form-control" placeholder="Loan Amount Kshs." ng-model="loanAmount">
+                                    </div>
+                                    <div class="form-group">
+                                        <label id="loanDuration" >Loan Duration</label>
+                                        <input type="text" class="form-control" placeholder="Loan Duration" ng-model="loanDuration">
+                                    </div>
+                                    <div class="form-group">
+                                        <label id="loanRate" >Loan Rate</label>
+                                        <input type="text" class="form-control" placeholder="rate %" ng-model="loanRate">
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-default">Send Request</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row-column">
-                            <div class="summary-card">
-                                <div class="LoansPending">
-                                    <h3>Outstanding Loans</h3><br>
-                                    <table>
-                                        <Tr>
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Outstanding Loans</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
                                             <th>Loan Amount</th>
                                             <th>Loan Duration</th>
                                             <th>Rate %</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr ng-repeat="loan in loans">
                                             <td>{{loans.loanAmount}}</td>
                                             <td>{{loans.loanDuration}}</td>
                                             <td>{{loans.loanRate}}</td>
                                         </tr>
-                                    </table>
-                                </div>
-                </div>                    </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- polls -->
             </div>
         </div>
     </div>

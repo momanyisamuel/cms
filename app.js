@@ -34,6 +34,7 @@ if (app.get('env') === 'development') {
 
 require('./routes')(app, passport);
 
+
 db.sequelize
 .sync({ force: true})
 .complete(function(err){
