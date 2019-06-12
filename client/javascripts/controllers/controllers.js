@@ -1,17 +1,109 @@
 'use strict';
 
-angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
+angular.module('app.controllers', ['socketService','pollService', 'ngResource','ngSanitize'])
 
 
 
 .controller('HomeCtrl', ['$scope','$http','$location', function ($scope, $http, $location){
-    
+    let user = JSON.parse(localStorage.getItem('currentUser'))
     $scope.authenticatedUser = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = $scope.authenticatedUser
     console.log($scope.authenticatedUser)
 
+    if(user.riskApetite >0 && user.riskApetite<1.6 ){
+        console.log(user.riskApetite)
+        $scope.riskName = 'LOW'
+    }else if(user.riskApetite >1.68 && user.riskApetite<2.35){
+        console.log('medium')
+        $scope.riskName = 'MEDIUM'   
+    }else if(user.riskApetite>2.36 && user.riskApetite<=3){
+        console.log('High')
+        $scope.riskName = 'HIGH'
+    }
+
+    // coontribution totals
+    $http.get('http://localhost:8000/api/chama').then(response => {
+        let contribute = response.data
+        var total = 0
+        Object.keys(contribute).forEach(function(key){
+            let contributionTotals = []
+            let amount = contribute[key].contributions
+            for(let i=0;i<amount.length; i++){
+                if(user.ChamaId === amount[i].ChamaId){
+                    contributionTotals.push(amount[i].contributionAmount)
+                }
+            }
+            for(let j =0;j<contributionTotals.length; j++){
+                console.log(contributionTotals[j])
+                total += contributionTotals[j]
+            }
+        })
+        console.log(total)
+        $scope.totals = total
+    }).catch(err=>console.log(err))
+
+    // total withdrawals
+    $http.get('http://localhost:8000/api/chama').then(response => {
+        let withdraw = response.data
+        var totalWithdrawn = 0
+        Object.keys(withdraw).forEach(function(key){
+            let withdrawalTotals = []
+            let withdrew = withdraw[key].withdrawals
+            for(let i=0;i<withdrew.length; i++){
+                if(user.ChamaId === withdrew[i].ChamaId){
+                    withdrawalTotals.push(withdrew[i].withdrawalAmount)
+                }
+            }
+            for(let j =0;j<withdrawalTotals.length; j++){
+                console.log(withdrawalTotals[j])
+                total += withdrawalTotals[j]
+            }
+        })
+        console.log(totalWithdrawn)
+        $scope.withdrawTotal = totalWithdrawn
+    }).catch(err=>console.log(err))
+
+    // total assets or liabilities
+    $http.get('http://localhost:8000/api/chama').then(response => {
+        let data = response.data
+        var totalAssets = 0
+        var totalLiabilities = 0
+        Object.keys(data).forEach(function(key){
+            let assetTotals = []
+            let liabilityTotals = []
+            let passData = data[key].portfolioes
+            for(let i=0;i<passData.length; i++){
+                // console.log(passData[i].amount)
+                if(user.ChamaId === passData[i].ChamaId && passData[i].assetFlag === 1){
+                    console.log(passData[i].amount)
+                    assetTotals.push(passData[i].amount)
+                } else if (user.ChamaId === passData[i].ChamaId && passData[i].assetFlag === 2 ){
+                    liabilityTotals.push(passData[i].amount)
+                    console.log(passData[i].amount)
+                }
+            }
+            for(let j =0;j<liabilityTotals.length; j++){
+                console.log(liabilityTotals[j])
+                totalLiabilities += liabilityTotals[j]
+            }
+
+            for(let j =0;j<assetTotals.length; j++){
+                console.log(assetTotals[j])
+                totalAssets += assetTotals[j]
+            }
+        })
+        console.log(totalAssets)
+        $scope.liabilityTotal = totalLiabilities
+        $scope.assetTotal = totalAssets
+    }).catch(err=>console.log(err))
+   
+    var self = this;
+    
+    self.showBoxOne = false;
+    self.showBoxTwo = false;
     if($scope.authenticatedUser.ChamaId === null) {
 
-        let message = `<div class="alert alert-info" role="alert">Hey ${ $scope.authenticatedUser.firstName } You need to create a Chama <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
+        let message = `<div class="alert alert-info" role="alert"><p>Hey ${ $scope.authenticatedUser.firstName } You need to create a Chama </p><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
     
 
         document.getElementById('message').innerHTML = message
@@ -51,10 +143,12 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
         form.addEventListener("submit", createChama)
 
     } else {    
-        let message = `<div class="alert alert-warning">${ $scope.authenticatedUser.firstName } You already belong to  a chama <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
+        let message = `<div class="alert alert-warning">${ $scope.authenticatedUser.firstName } You  belong to  a chama Karibu Sana!<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`
     
         document.getElementById('message').innerHTML = message
-    }   
+    }  
+    
+    
 }])
 
 .controller('riskCtrl', ['$scope','$http','$location', function ($scope, $http,$location){
@@ -411,6 +505,8 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 }])
 
 .controller('portfolioCtrl', ['$scope', '$http' , '$location', function ($scope, $http, $location){
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
     var portfolioForm = function(){
         var url = 'http://localhost:8000/api/portfolio'
 
@@ -446,21 +542,24 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
     // coontribution totals
     $http.get('http://localhost:8000/api/chama').then(response => {
         let contribute = response.data
+        // console.log(response.data)
         var total = 0
         Object.keys(contribute).forEach(function(key){
             let contributionTotals = []
             let amount = contribute[key].contributions
+            // console.log(amount)
+            $scope.contributions = amount
             for(let i=0;i<amount.length; i++){
                 if(user.ChamaId === amount[i].ChamaId){
                     contributionTotals.push(amount[i].contributionAmount)
                 }
             }
             for(let j =0;j<contributionTotals.length; j++){
-                console.log(contributionTotals[j])
+                // console.log(contributionTotals[j])
                 total += contributionTotals[j]
             }
         })
-        console.log(total)
+        // console.log(total)
         $scope.totals = total
     }).catch(err=>console.log(err))
 
@@ -477,11 +576,11 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
                 }
             }
             for(let j =0;j<withdrawalTotals.length; j++){
-                console.log(withdrawalTotals[j])
+                // console.log(withdrawalTotals[j])
                 total += withdrawalTotals[j]
             }
         })
-        console.log(totalWithdrawn)
+        // console.log(totalWithdrawn)
         $scope.withdrawTotal = totalWithdrawn
     }).catch(err=>console.log(err))
 
@@ -490,40 +589,72 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
         let data = response.data
         var totalAssets = 0
         var totalLiabilities = 0
+        $scope.assets = []
         Object.keys(data).forEach(function(key){
             let assetTotals = []
             let liabilityTotals = []
             let passData = data[key].portfolioes
+            
+            
             for(let i=0;i<passData.length; i++){
+                $scope.assets.push(passData[i])
                 // console.log(passData[i].amount)
                 if(user.ChamaId === passData[i].ChamaId && passData[i].assetFlag === 1){
-                    console.log(passData[i].amount)
+                    // console.log(passData[i].amount)
                     assetTotals.push(passData[i].amount)
                 } else if (user.ChamaId === passData[i].ChamaId && passData[i].assetFlag === 2 ){
                     liabilityTotals.push(passData[i].amount)
-                    console.log(passData[i].amount)
+                    // console.log(passData[i].amount)
                 }
             }
             for(let j =0;j<liabilityTotals.length; j++){
-                console.log(liabilityTotals[j])
+                // console.log(liabilityTotals[j])
                 totalLiabilities += liabilityTotals[j]
             }
 
             for(let j =0;j<assetTotals.length; j++){
-                console.log(assetTotals[j])
+                // console.log(assetTotals[j])
                 totalAssets += assetTotals[j]
             }
         })
-        console.log(totalAssets)
+        // console.log(totalAssets)
         $scope.liabilityTotal = totalLiabilities
         $scope.assetTotal = totalAssets
+    }).catch(err=>console.log(err))
+
+    $http.get('http://localhost:8000/api/user').then(response => {
+        console.log(response.data)
+        let member = response.data
+        $scope.members = []
+        Object.keys(member).forEach(function(key){
+            
+            console.log(member[key].userStatus)
+            let state = member[key].userStatus
+            let email = member[key].email
+            let firstName = member[key].firstName
+            let lastName = member[key].lastName
+            let chama = member[key].chama
+            let status = ''
+            if(state === 0 ) {
+                status = 'Invited'
+            } else if (state === 1) {
+                status = 'Active'
+            } else if (state === 2) {
+                status = 'Revoked'
+            }
+            $scope.members.push({firstName:firstName,lastName:lastName,email:email,chama:chama.name,ChamaId:chama.id,status:status})
+            
+        })
+        console.log($scope.members)
+        
     }).catch(err=>console.log(err))
 
    
 }])
 
 .controller('votesCtrl', ['$scope', '$http','$location', function ($scope, $http, $location){
-
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
     $http.get('http://localhost:8000/api/poll').then((response)=>{
         console.log(response.data.choi)
         var questions = response.data
@@ -595,7 +726,8 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 }])
 // Controller for an individual poll
 .controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http','$location', function ($scope, $routeParams, $http,$location) {	
-   
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+    $scope.user = user
     $http.get('http://localhost:8000/api/poll/'+$routeParams.id).then((response)=>{
         console.log(response.data)
         $scope.poll = response.data
