@@ -41,11 +41,11 @@
                             <form id="portfolioForm" ng-submit="portfolioForm()">
                                 <div class="form-group">
                                 <label for="name">Asset/Liability Name:</label>
-                                    <input ng-model="assetName" type="text" class="form-control" id="name" placeholder="Item Name"/>
+                                    <input ng-model="assetName" type="text"  required class="form-control" id="name" placeholder="Item Name"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="category">Item Category:</label>
-                                    <input ng-model="assetCategory" type="text" class="form-control" id="category" placeholder="Land,vehicle,property,business"/>
+                                    <input ng-model="assetCategory" type="text" required  class="form-control" id="category" placeholder="Land,vehicle,property,business"/>
                                 </div>
                                 <div class="form-group radio">
                                     <h4>Is this an Asset?:</h4>
@@ -56,19 +56,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="description">Item description:</label>
-                                    <input ng-model="assetDescription" type="text" class="form-control" id="description" placeholder="Details of the item"/>
+                                    <input ng-model="assetDescription" type="text"  required class="form-control" id="description" placeholder="Details of the item"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="amount">Cost of Item:</label>
-                                    <input ng-model="assetAmount" type="text" class="form-control" id="amount" placeholder="Amount"/>
+                                    <input ng-model="assetAmount" type="text"  required pattern="^[0-9]+(\.[0-9]{1,2})?$" class="form-control" id="amount" placeholder="Amount"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="dateRecorded">Date Purchased:</label>
-                                    <input ng-model="dateRecorded" type="text" class="form-control" id="dateRecorded" placeholder="dd/mm/yyyy"/>
+                                    <input ng-model="dateRecorded" type="text"  required pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$" class="form-control" id="dateRecorded" placeholder="dd/mm/yyyy"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="refDetails">Payment/item Reference Number:</label>
-                                    <input ng-model="refDetails" type="text" class="form-control" id="refDetails" placeholder="Reference"/>
+                                    <input ng-model="refDetails" type="text"  required class="form-control" id="refDetails" placeholder="Reference"/>
                                 </div>
                                 <div class="form-group">
                                     <label for="comment">comment </label>

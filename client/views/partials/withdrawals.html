@@ -41,19 +41,19 @@
                                     <form id="withdrawalForm" ng-submit="withdrawalForm()">
                                         <div class="form-group">
                                             <label for="withdrawalDate">Date Withdrawn:</label>
-                                            <input ng-model="withdrawalDate" type="text" class="form-control" id="withdrawalDate" placeholder="dd/mm/yyyy"/>
+                                            <input ng-model="withdrawalDate" type="text"  required pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$" class="form-control" id="withdrawalDate" placeholder="dd/mm/yyyy"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="withdrawRefNumber">Payment Reference Number:</label>
-                                            <input ng-model="withdrawRefNumber" type="text" class="form-control" id="withdrawRefNumber" placeholder="MPESA REF"/>
+                                            <input ng-model="withdrawRefNumber" type="text"  required class="form-control" id="withdrawRefNumber" placeholder="MPESA REF"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="withdrawalAmount">Amount Withdrawn:</label>
-                                            <input ng-model="withdrawalAmount" type="text" class="form-control" id="withdrawalAmount" placeholder="Amount"/>
+                                            <input ng-model="withdrawalAmount" type="text" pattern="^[0-9]+(\.[0-9]{1,2})?$" required class="form-control" id="withdrawalAmount" placeholder="Amount"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="paymentPurpose">Purpose of funds:</label>
-                                            <input ng-model="paymentPurpose" type="text" class="form-control" id="paymentPurpose" placeholder="withdrawal"/>
+                                            <input ng-model="paymentPurpose" type="text"  required class="form-control" id="paymentPurpose" placeholder="withdrawal"/>
                                         </div>
                                         <div class="form-group">
                                             <label for="comment">comment </label>
