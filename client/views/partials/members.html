@@ -16,7 +16,7 @@
             <li><a href="#/reports">Reports</a></li>
         </ul>
         <div class="sidebar-user">
-            <p><i class="far fa-user-circle"></i> John Doe</p>
+            <p><i class="far fa-user-circle"></i> {{user.firstName}}</p>
         </div>
     </div>
     <div class="inner-section">
@@ -61,8 +61,24 @@
                                     <h3 class="panel-title">Your Chama has <span style="color: chartreuse"  class="badge">8</span> Active Members</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <div class="list-group" ng-repeat="member in members">
-                                        <a href="#" class="list-group-item"> {{member.name}}</a>
+                                    <table class="table table-striped">
+                                        <thead> 
+                                            <tr> 
+                                                <th>First Name</th>
+                                                <th>Status</th>
+                                            </tr> 
+                                        </thead> 
+                                        <tbody> 
+                                
+                                    <tr ng-repeat="member in members">
+                                        <!-- <a href="#" class="list-group-item"> Member Status</a> -->
+                                        <th scope="row"></th> 
+                                        <td>{{member.firstName}}</td>
+                                        <td>{{member.Status}}</td>
+                                    </tr>
+                                </tbody> 
+                            </table>
+                        </div>
                                     </div>
                                 </div>
                             </div>

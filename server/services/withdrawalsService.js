@@ -1,13 +1,14 @@
 var db = require('../models');
 
 exports.create = function (req, res, callback){
+    console.log(req.body);
     db.Withdrawals.create({
-        amount: req.body.amount,
+        withdrawalAmount: req.body.withdrawalAmount,
         withdrawalDate: req.body.withdrawalDate,
         withdrawRefNumber: req.body.withdrawRefNumber,
-        withdrawalAmount: req.body.withdrawalAmount,
         paymentPurpose: req.body.paymentPurpose,
-        comment: req.body.comment
+        comment: req.body.comment,
+        UserId: req.body.UserId       
     })
     .success(function (withdrawal){
         if (callback){
@@ -16,10 +17,10 @@ exports.create = function (req, res, callback){
         else {
           res.send(200, withdrawal);  
         }
+        console.log(withdrawal);
     })
     .error(function (err){
-        console.log('error: withdrawalService.create');
-        res.send(500, {error: 'error: withdrawalService.create'});
+        res.send(500, {error: 'error: withdrawalsService.create'});
     })
 };
 
