@@ -37,7 +37,7 @@ exports = module.exports = function (app, passport){
     app.get('/listpolls', function(req, res){
         res.render('index');
     });
-    app.get('/polldetails/:id', function(req, res){
+    app.get('/viewvote/:id', function(req, res){
         res.render('index');
     });
     app.get('/newpoll', function(req, res){
@@ -47,6 +47,9 @@ exports = module.exports = function (app, passport){
         res.render('index');
     });
     app.get('/portfolio', function(req, res){
+        res.render('index');
+    });
+    app.get('/votes', function(req, res){
         res.render('index');
     });
 

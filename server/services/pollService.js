@@ -12,7 +12,6 @@ exports.create = (req, res, callback) => {
             passData.push({ 
                 text: element,
                 PollId: poll.id
-
             })
         });
         console.log(passData)
@@ -22,8 +21,6 @@ exports.create = (req, res, callback) => {
             callback(poll)
         }
         else {
-
-
             res.send(200, poll);  
         }
     })
@@ -34,7 +31,16 @@ exports.create = (req, res, callback) => {
 }
 
 exports.readAll = (req,res, callback) => {
-    db.Poll.findAll().success(function (polls){
+    db.Poll.findAll({
+        include:[{
+            model: db.Choice,
+            attributes: ['id','PollId','text'],
+            include:[{
+                model:db.Vote,
+                attributes:['id','ChoiceId','UserId']
+            }]
+        }]
+    }).success(function (polls){
         if (callback){
             callback(polls);
         }
@@ -52,8 +58,16 @@ exports.read = function (req, res, callback){
     db.Poll.find({
         where: {
             id: req.params.id
-        },include:[{model: db.Choice}]
-    
+        },
+        attributes: ['question'],
+        include:[{
+            model: db.Choice,
+            attributes: ['id','PollId','text'],
+            include:[{
+                model:db.Vote,
+                attributes:['id','ChoiceId','UserId']
+            }]
+        }]
     })
     .success(function (poll){
         // res.json(poll);

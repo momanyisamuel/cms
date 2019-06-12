@@ -27,42 +27,57 @@
             
             <div class="main-content">
                 <div class="data-section">
-                    <div class="well well-lg">
-                        <strong>Question</strong><br>{{poll.question}}
-                    </div>
-                    <div ng-hide="poll.userVoted">
-                        <p class="lead">Please select one of the following options.</p>
-                        <form role="form" ng-submit="vote()">
-                            <div ng-repeat="choice in poll.choices" class="radio">
-                                <label>
-                                    <input type="radio" name="choice" ng-model="poll.userVote" value="{{choice.id}}">
-                                    {{choice.text}}
-                                </label>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="well well-lg">
+                                    <strong>Question</strong><br><h2>{{poll.question}}</h2>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                <a href="#/listpolls" class="btn btn-default" role="button">
-                                    <span class="glyphicon glyphicon-arrow-left"></span> Back to Poll
+                            <div>
+                                <p class="lead">Please select one of the following options.</p>
+                                <form role="form" ng-submit="vote()">
+                                    <div ng-repeat="choice in poll.choices" class="radio">
+                                        <label>
+                                            <input type="radio" name="choice" ng-model="poll.answer" value="{{choice.id}}">
+                                            {{choice.text}}
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">Vote</button>
+                                    <a href="#/votes" class="btn btn-default" role="button">
+                                        <span class="glyphicon glyphicon-arrow-left"></span> Back to Poll
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Vote results</h3>
                                 </div>
-                                <div class="col-xs-6">
-                                    <button class="btn btn-primary pull-right" type="submit">Vote &raquo;</button>
+                                <div class="panel-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Choice</th>
+                                                <th>Votes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="choice in poll.choices">
+                                                <td>{{choice.text}}</td>
+                                                <td style="width: {{choice.votes.length/poll.totalVotes*100}}%;">
+                                                    {{choice.votes.length}}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                    <div ng-show="poll.userVoted">
-                        <table class="result-table">
-                            <tbody>
-                                <tr ng-repeat="choice in poll.choices">
-                                    <td>{{choice.text}}</td>
-                                    <td>
-                                        <table style="width: {{choice.votes.length/poll.totalVotes*100}}%;">
-                                            <tr><td>{{choice.votes.length}}</td></tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                
+                
+<!--                         
                         <p>
                             <em>{{poll.totalVotes}} votes counted so far. 
                                 <span ng-show="poll.userChoice">You voted for 
@@ -72,7 +87,7 @@
                         </p>
                         <p><hr></p>
                         <p><a href="#/polls" class="btn btn-default" role="button">
-                        <span class="glyphicon glyphicon-arrow-left"></span> Back to Poll List</a></p>
+                        <span class="glyphicon glyphicon-arrow-left"></span> Back to Poll List</a></p> -->
                     </div>
     </div>
     </div>
