@@ -14,27 +14,27 @@
                         <form name="userForm" ng-submit="submitUserForm()">
                             <div class="form-group">
                                 <label for="firstname">FirstName:</label>
-                                <input ng-model="firstName" type="text" class="form-control" id="firstName" placeholder="Enter FirstName"/>
+                                <input ng-model="firstName" type="text"  required class="form-control" id="firstName" placeholder="Enter FirstName"/>
                             </div>
                             <div class="form-group">
                                 <label for="lastname">LastName:</label>
-                                <input ng-model="lastName" type="text" class="form-control" id="lastName" placeholder="Enter LastName"/>
+                                <input ng-model="lastName" type="text"  required  class="form-control" id="lastName" placeholder="Enter LastName"/>
                             </div>
                             <div class="form-group">
                                 <label for="lastname">Email:</label>
-                                <input ng-model="email" type="text" class="form-control" id="email" placeholder="Enter LastName"/>
+                                <input ng-model="email" type="email"  required class="form-control" id="email" placeholder="Enter LastName"/>
                             </div>
                             <div class="form-group">
-                                <label for="lastname">Phone Number:</label>
-                                <input ng-model="phoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="Enter phoneNumber"/>
+                                <label for="lastname">Mobile Phone Number:</label>
+                                <input ng-model="phoneNumber" type="text" required  pattern="[0-9]*" maxlength="9"class="form-control" id="phoneNumber" placeholder="Enter phoneNumber(9digits) - 07** ******"/>
                             </div>
                             <div class="form-group">
                                 <label for="lastname">national Id</label>
-                                <input ng-model="nationalId" type="text" class="form-control" id="nationalId" placeholder="Enter national id"/>
+                                <input ng-model="nationalId" type="text" required pattern="[0-9]*" minlength="6" maxlength="8"  class="form-control" id="nationalId" placeholder="Enter national id - 8 digits"/>
                             </div>
                             <div class="form-group">
                                 <label for="lastname">Password:</label>
-                                <input ng-model="password" type="password" class="form-control" id="password" placeholder="Enter LastName"/>
+                                <input ng-model="password" type="password"  required class="form-control" id="password" placeholder="Enter LastName"/>
                             </div>
                             <div class="form-group">
                                 <button type="submit">Register</button>

@@ -8,27 +8,27 @@
                 <form id = "accept" name="accept" ng-submit="accept()">
                     <div class="form-group">
                         <label for="firstname">FirstName:</label>
-                        <input ng-model="acceptfirstName" type="text" class="form-control" id="firstName" placeholder="Enter FirstName"/>
+                        <input ng-model="acceptfirstName" type="text" required class="form-control" id="firstName" placeholder="Enter FirstName"/>
                     </div>
                     <div class="form-group">
                         <label for="lastname">LastName:</label>
-                        <input ng-model="acceptlastName" type="text" class="form-control" id="lastName" placeholder="Enter LastName"/>
+                        <input ng-model="acceptlastName" type="text"  required class="form-control" id="lastName" placeholder="Enter LastName"/>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Email:</label>
-                        <input ng-model="acceptemail" type="text" class="form-control" id="email" placeholder="Enter LastName"/>
+                        <label for="acceptemail">Email:</label>
+                        <input ng-model="acceptemail" type="text"  required class="form-control" id="email" placeholder="Enter LastName"/>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Phone Number:</label>
-                        <input ng-model="acceptphoneNumber" type="text" class="form-control" id="phoneNumber" placeholder="Enter phoneNumber"/>
+                        <label for="acceptphoneNumber">Phone Number:</label>
+                        <input ng-model="acceptphoneNumber" type="text" required  class="form-control" id="phoneNumber" placeholder="Enter phoneNumber"/>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">national Id</label>
-                        <input ng-model="acceptnationalId" type="text" class="form-control" id="nationalId" placeholder="Enter national id"/>
+                        <label for="acceptnationalId">national Id</label>
+                        <input ng-model="acceptnationalId" type="text"  required class="form-control" id="nationalId" placeholder="Enter national id"/>
                     </div>
                     <div class="form-group">
-                        <label for="lastname">Password:</label>
-                        <input ng-model="acceptpassword" type="password" class="form-control" id="password" placeholder="Enter LastName"/>
+                        <label for="acceptpassword">Password:</label>
+                        <input ng-model="acceptpassword" type="password"  required class="form-control" id="password" placeholder="Enter LastName"/>
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form> 
