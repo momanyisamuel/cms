@@ -54,7 +54,14 @@ exports.read = function (req, res, callback){
 };
 
 exports.readAll = function (req, res, callback){
-    db.User.findAll()
+    db.User.findAll({
+        include: [{
+            model: db.Chama,
+            include: [{
+                model:db.Contributions
+            }]
+        }]
+    })
     .success(function (users){
         if (callback){
             callback(users);
@@ -180,7 +187,7 @@ exports.sendInvites = function(req, res, callback) {
     const output = `
         <p>You have been invited to join a chama by ${req.body.email} </p>
         <h3>Accept invite and register</h3>
-        <button><a href="http://localhost:8000/#/acceptinvite">Accept</a></button>
+        <button><a href="http://localhost:8000/#/acceptinvites">Accept</a></button>
     `
     
     // create reusable transporter object using the default SMTP transport

@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   Contributions.associate = function(models) {
     // associations can be defined here
    Contributions.belongsTo(models.User)
+   Contributions.belongsTo(models.Chama)
     
   };
   return Contributions;

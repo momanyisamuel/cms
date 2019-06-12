@@ -7,7 +7,8 @@ exports.create = function (req, res, callback){
         contributionAmount: req.body.contributionAmount,
         fundAssignment: req.body.fundAssignment,
         comment: req.body.comment,
-        UserId: req.body.UserId
+        UserId: req.body.UserId,
+        ChamaId: req.body.ChamaId
     })
     .success(function (contribution){
         if (callback){

@@ -48,7 +48,15 @@ exports.read = function (req, res, callback){
 };
 
 exports.readAll = function (req, res, callback){
-    db.Chama.findAll()
+    db.Chama.findAll({
+        include:[{
+            model:db.Contributions
+        },{
+            model:db.Withdrawals
+        },{
+            model:db.Portfolio
+        }]
+    })
     .success(function (chamas){
         if (callback){
             callback(chamas);
