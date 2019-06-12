@@ -22,95 +22,93 @@
             
         </div>
         
+        
         <div class="main-content">
             <br>
             <div class="data-section">
                 <!-- notification -->
                 <div id="message">
+                    
                 </div>
-                <!-- <div class="row">
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <div class="thumbnail">
-                        <div class="caption">
-                            <h3>Thumbnail label</h3>
-                            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
+                <button class="btn btn-default pull-right" ng-click="showBoxOne = !showBoxOne">Add Chama</button>
+                <div class="box-one" ng-show="showBoxOne">
+                    <!-- chamaa create -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form id="createChama" ng-submit="createChama" class="form-inline">
+                                <div class="form-group">
+                                    <label for="name" class="sr-only"></label>
+                                    <input type="text" class="form-control" value="" ng-model="name" name="name" placeholder="Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="sr-only"></label>
+                                    <input type="text" class="form-control" value="" ng-model="country" name="country" placeholder="Country">
+                                </div>
+                                <button type="submit" class="btn btn-default">Create Chama</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div id="show" class="row" ng-if="authenticatedUser.ChamaId != null && authenticatedUser.userStatus == null">
-                        <div class="row-column">
-                                <div class="summary-card">
-                                    <h3>Risk apetite</h3>
-                                    <div>
-                                        <p>Your risk Apetite is <span style="color: chartreuse">Medium</span></p>
-                                    </div>
+                <div class="row" ng-if="authenticatedUser.ChamaId != null && authenticatedUser.userStatus == 1">
+                    <div class="col-sm-6 col-md-4">
+                            <div class="box-part text-center thumbnail">
+                                <br>
+                                <i class="glyphicon glyphicon-grain" aria-hidden="true" style="font-size: 30px"></i>
+                                
+                                <div class="title">
+                                    <h1>Risk apetite</h1>
                                 </div>
-                            </div>
-                            <div class="row-column">
-                                <div class="summary-card">
-                                    <h3>Fines incured </h3>
-                                    <div>
-                                        <p>$30 fines incurred</p>
-                                    </div>
+                                
+                                <div class="text">
+                                    <p>Your risk Apetite is <span class="badge">{{riskName}}</span></p>
                                 </div>
+                            
                             </div>
-                            <div class="row-column">
-                                <div class="summary-card">
-                                    <h3>Goal summary</h3>
-                                    <div>
-                                        <p>3 goals completed</p>
-                                    </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                            <div class="box-part text-center thumbnail">
+                                <br>
+                                <i class="glyphicon glyphicon-tower" aria-hidden="true" style="font-size: 30px"></i>
+                                
+                                <div class="title">
+                                    <h1>Total Assets</h1>
                                 </div>
-                            </div>
-                            <div class="row-column">
-                                <div class="summary-card">
-                                    <h3>Total contributions</h3>
-                                    <div>
-                                        <p>$30000</p>
-                                    </div>
+                                
+                                <div class="text">
+                                    <p>KES{{assetTotal}}</p>
                                 </div>
+                            
                             </div>
-                </div> -->
-                
-                <!-- chamaa create -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <form id="createChama" ng-submit="createChama" class="form-inline">
-                            <div class="form-group">
-                                <label for="name" class="sr-only"></label>
-                                <input type="text" class="form-control" value="" ng-model="name" name="name" placeholder="Name">
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                            <div class="box-part text-center thumbnail">
+                                <br>
+                                <i class="glyphicon glyphicon-piggy-bank" aria-hidden="true"style="font-size: 30px"></i>
+                                
+                                <div class="title">
+                                    <h1>Total Contributions</h1>
+                                </div>
+                                
+                                <div class="text">
+                                    <p>KES{{totals}}</p>
+                                </div>
+                            
                             </div>
-                            <div class="form-group">
-                                <label for="name" class="sr-only"></label>
-                                <input type="text" class="form-control" value="" ng-model="country" name="country" placeholder="Country">
+                    </div>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="box-part text-center thumbnail">
+                            <br>
+                            <i class="glyphicon glyphicon-bitcoin" aria-hidden="true" style="font-size: 30px"></i>
+                            
+                            <div class="title">
+                                <h1>Net Worth</h1>
                             </div>
-                            <button type="submit" class="btn btn-default">Create Chama</button>
-                        </form>
+                            
+                            <div class="text">
+                                <p>{{(totals-withdrawTotal)+(assetTotal-liabilityTotal)}}</p>
+                            </div>
+                        
+                        </div>
                     </div>
                 </div>
             </div>
