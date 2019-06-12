@@ -9,7 +9,8 @@ exports.create = function (req, res, callback){
         amount: req.body.amount,
         dateRecorded: req.body.dateRecorded,
         refDetails: req.body.refDetails,
-        comment: req.body.comment
+        comment: req.body.comment,
+        ChamaId: req.body.ChamaId
     })
     .success(function (portfolio){
         if (callback){
