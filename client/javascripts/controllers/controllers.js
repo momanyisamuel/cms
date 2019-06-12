@@ -331,68 +331,27 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 }])
 
 
-.controller('votesCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the votes page';
-}])
-
-.controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the reports page';
-}])
-.controller('pollCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the reports page';
-}])
-
-// Controller for the poll list
-.controller('PollListCtrl', ['$scope' ,'$http',function ($scope, $http) {
+.controller('votesCtrl', ['$scope', '$http','$location', function ($scope, $http, $location){
     $http.get('http://localhost:8000/api/poll').then((response)=>{
-        console.log(response.data)
-        $scope.polls = response.data
+        console.log(response.data.choi)
+        var questions = response.data
+        $scope.choices = []
+        questions.forEach(element => {
+            console.log(element.choices)
+            let options = element.choices
+            options.forEach(element => {
+                console.log(element)
+                $scope.choices.push(element)
+            })
+        });
+        
+        $scope.votes = response.data
+        console.log($scope.votes)
     }).catch(err=>console.log(err))
-}])
 
-// Controller for an individual poll
-.controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http','socket','Poll' , function ($scope, $routeParams, $http, socket, Poll) {	
-    socket.on('init', function (data){
-        console.log('hello')
-    });
 
-    $scope.poll = Poll.get({pollId: $routeParams.id});
-	// $http.get('http://localhost:8000/api/poll/'+$routeParams.id).then((response)=>{
-    //     console.log(response.data)
-    //     $scope.poll = response.data
-    // }).catch(err=>console.log(err))
 
-	socket.on('myvote', function(data) {
-		console.log(data);
-		if(data.id === $routeParams.id) {
-			$scope.poll = data;
-		}
-	});
-	
-	socket.on('vote', function(data) {
-		console.dir(data);
-		if(data.id === $routeParams.id) {
-			$scope.poll.choices = data.choices;
-			$scope.poll.totalVotes = data.totalVotes;
-		}		
-	});
-	
-	$scope.vote = function() {
-		var pollId = $scope.poll.id,
-				choiceId = $scope.poll.userVote;
-		
-		if(choiceId) {
-			var voteObj = { poll_id: pollId, choice: choiceId };
-			socket.emit('send:vote', voteObj);
-		} else {
-			alert('You must select an option to vote for');
-		}
-	};
-}])
-
-// Controller for creating a new poll
-.controller('PollNewCtrl' , [ '$scope', '$location','$http' ,function ($scope, $location,$http) {
-	// Define an empty poll model object
+    // Define an empty poll model object
 	$scope.poll = {
 		question: '',
 		choices: [ { text: '' }, { text: '' }]
@@ -411,7 +370,6 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
         // Check that a question was provided
         if(poll.question.length > 0) {
             var choiceCount = 0;
-            
             // Loop through the choices, make sure at least two provided
             for(var i = 0, ln = poll.choices.length; i < ln; i++) {
                 var choice = poll.choices[i];
@@ -422,11 +380,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
                     choiceCount++
                 }
             }
-        
             if(choiceCount > 1) {
-                // Create a new poll from the model
-                // var newPoll = new Poll(poll);
-                
                 // Call API to save poll to the database - we need the group ID, User ID , question and choices and PollID for the Poll
                console.log(getText)
                        $http.post('http://localhost:8000/api/poll', {
@@ -438,7 +392,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
                             }
                         }).then(function(response) { 
                             console.log(response) 
-                            $location.url('/listpolls')
+                            $location.url('/votes')
                         }).catch(err => console.log(err))
             
                     } else {
@@ -449,7 +403,37 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
                 }
             };
 
-    
+}])
+
+.controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
+    $scope.welcome = 'Welcome to the reports page';
+}])
+
+
+// Controller for an individual poll
+.controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http','$location', function ($scope, $routeParams, $http,$location) {	
+   
+    $http.get('http://localhost:8000/api/poll/'+$routeParams.id).then((response)=>{
+        console.log(response.data)
+        $scope.poll = response.data
+    }).catch(err=>console.log(err))
+
+	
+	
+	$scope.vote = function() {
+        console.log($scope.poll.answer)
+        let url = 'http://localhost:8000/api/vote'
+        $http.post(url, {
+                ChoiceId: $scope.poll.answer,
+            },
+            {
+                headers: { 'Content-Type': 'application/json; charset=UTF-8'
+            }
+        }).then(function(response) { 
+            console.log(response) 
+            $location.url('/votes')
+        }).catch(err => console.log(err))
+	};
 }])
 
 // Controller for the portfolio list

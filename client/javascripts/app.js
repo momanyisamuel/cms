@@ -82,27 +82,14 @@ angular.module('app', ['app.controllers', 'ngRoute'])
     .otherwise({
         redirectTo: '/'
     })    
-    .when('/listpolls', {
-        templateUrl: '/views/partials/listpolls.html',
-        controller: 'PollListCtrl'})
-    .otherwise({
-        redirectTo: '/'
-    })
-    
-    .when('/polldetails/:id', {
+        
+    .when('/viewvote/:id', {
         templateUrl: '/views/partials/polldetails.html',
         controller: 'PollItemCtrl'})
     .otherwise({
         redirectTo: '/'
     })
 
-    .when('/newpoll', {
-        templateUrl: '/views/partials/newpoll.html',
-        controller: 'PollNewCtrl'})
-    .otherwise({
-        redirectTo: '/'
-    })
-    
     .when('/portfolioview/', {
         templateUrl: '/views/partials/portfolioview.html',
         controller: 'PortfolioListCtrl'})

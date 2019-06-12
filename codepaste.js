@@ -143,3 +143,30 @@ userService.findByEmail({where:{ email : data.email }}, function(err, user){
             $location.url('/members')
         }).catch(err => console.log(err))
     }
+
+
+    attributes: ['question'],
+        include:[{
+            model: db.Choice,
+            attributes: ['id','PollId','text'[db.sequelize.fn('COUNT', db.sequelize.col('Choice.votes.id')),'voteCount']],
+            include:[{
+                model:db.Vote
+            }]
+        }]
+
+
+        attributes: ['question'],
+        include: {
+            model: db.models.Choice,
+            attributes: [
+              ['id', 'PollId'],
+              'text',
+              [db.sequelize.fn('COUNT', db.sequelize.col('Choice.votes.id')), 'voteCount']
+            ],
+            include: {
+              model: db.models.vote,
+              attributes: []
+            }
+        },
+        group: ['Choice.id'],
+        order: [[db.sequelize.literal('`Choice.voteCount`'), 'ASC']]

@@ -1,9 +1,8 @@
 var db = require('../models');
 
 exports.create = function (req, res, callback){
-    db.Votes.create({
-        answer: req.body.answer,
-        pollDate: req.body.pollDate
+    db.Vote.create({
+        ChoiceId: req.body.ChoiceId
     })
     .success(function (vote){
         if (callback){
@@ -20,7 +19,7 @@ exports.create = function (req, res, callback){
 };
 
 exports.read = function (req, res, callback){
-    db.Votes.find({
+    db.Vote.find({
         where: {
             id: req.params.id
         }
@@ -46,7 +45,7 @@ exports.read = function (req, res, callback){
 };
 
 exports.readAll = function (req, res, callback){
-    db.Votes.findAll()
+    db.Vote.findAll()
     .success(function (votes){
         if (callback){
             callback(votes);
@@ -62,7 +61,7 @@ exports.readAll = function (req, res, callback){
 };
 
 exports.update = function (req, res, data, callback){
-    db.Votes.find({
+    db.Vote.find({
         where: {
             id: req.params.id
         }
@@ -95,7 +94,7 @@ exports.update = function (req, res, data, callback){
 };
 
 exports.delete = function (req, res){
-    db.Votes.find({
+    db.Vote.find({
         where: {
             id: req.params.id
         }
