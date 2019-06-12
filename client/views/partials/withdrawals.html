@@ -16,7 +16,7 @@
         </ul>
 
         <div class="sidebar-user">
-            <p><i class="far fa-user-circle"></i> John Doe</p>
+            <p><i class="far fa-user-circle"></i> {{user.firstName}}</p>
         </div>
     </div>
     <div class="inner-section">
@@ -32,29 +32,70 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Add withdrawal or make group payment form</h3>
-                            </div>
-                            <div class="panel-body">
-                                Panel content
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Admin Kindly input withdrawal details</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <form id="withdrawalForm" ng-submit="withdrawalForm()">
+                                        <div class="form-group">
+                                            <label for="withdrawalDate">Date Withdrawn:</label>
+                                            <input ng-model="withdrawalDate" type="text" class="form-control" id="withdrawalDate" placeholder="dd/mm/yyyy"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="withdrawRefNumber">Payment Reference Number:</label>
+                                            <input ng-model="withdrawRefNumber" type="text" class="form-control" id="withdrawRefNumber" placeholder="MPESA REF"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="withdrawalAmount">Amount Withdrawn:</label>
+                                            <input ng-model="withdrawalAmount" type="text" class="form-control" id="withdrawalAmount" placeholder="Amount"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="paymentPurpose">Purpose of funds:</label>
+                                            <input ng-model="paymentPurpose" type="text" class="form-control" id="paymentPurpose" placeholder="withdrawal"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="comment">comment </label>
+                                            <input ng-model="comment" type="text" class="form-control" id="comment" placeholder="Comments"/>
+                                        </div>                
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Withdrawals made</h3>
-                            </div>
-                            <div class="panel-body">
-                                Panel content
+                        <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Chamaa withdrawals</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-striped">
+                                        <thead> 
+                                            <tr> 
+                                                <th>#</th> 
+                                                <th>Withdrawal Date</th>
+                                                <th>Payment Reference</th>
+                                                <th>Amount</th>
+                                                <th>Reason/Purpose</th>
+                                            </tr> 
+                                        </thead> 
+                                        <tbody> 
+                                            <tr ng-repeat="withdrawal in withdrawals">
+                                                <th scope="row">{{withdrawal.id}}</th> 
+                                                <td>{{withdrawal.withdrawalDate}}</td>
+                                                <td>{{withdrawal.withdrawRefNumber}}</td>
+                                                <td>{{withdrawal.withdrawalAmount}}</td>
+                                                <td>{{withdrawal.paymentPurpose}}</td>
+                                            </tr>
+                                        </tbody> 
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- polls -->
+                    </div>          
+                </div>    
             </div>
         </div>
     </div>
-</div>
+    

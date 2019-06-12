@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<html ng-app="app">
-  <head>
-    <title>My Chama</title>
-    <!-- stylesheets -->
-    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet"> 
-    <!-- Latest compiled and minified CSS -->
-    <link rel='stylesheet' href='stylesheets/reset.css' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    
-    <link rel='stylesheet' href='stylesheets/style.css' />
-    <!-- scripts -->
-   
-
-    <base href="/">
-    <!-- meta -->
-  </head>
-  <body>
-     
-    <div class="wrapper">
-        <div class="top-navbar">
-            <div class="logo">
-                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="40pt" height="40pt" viewBox="0 0 1300.000000 1390.000000"
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="1300.000000pt" height="1390.000000pt" viewBox="0 0 1300.000000 1390.000000"
  preserveAspectRatio="xMidYMid meet">
 <metadata>
 Created by potrace 1.15, written by Peter Selinger 2001-2017
@@ -113,38 +93,3 @@ l-583 1 0 130 0 130 965 0 965 0 0 -130z"/>
 -80z"/>
 </g>
 </svg>
-                <a href="#/"> FCMS</a>
-            </div>
-            <div class="menu">
-                <ul class="top-bar--nav">
-                    <li><a href="#/login">Login</a></li>
-                    <li><a href="#/register">Register</a></li>
-                    <li ng-controller="loginCtrl"><a href="#/login" ng-click="logout()">Logout</a></li>
-                </ul>
-            </div>
-        </div>
-        <ng-view></ng-view>
-    </div> 
-    <script src="/socket.io/socket.io.js"></script>     
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-resource.min.js"></script>
-    <script type="text/javascript" src="javascripts/services/socket.js"></script>
-    <script type="text/javascript" src="javascripts/services/poll.js"></script>
-    <script type="text/javascript" src="javascripts/services/services.js"></script>
-    <script type="text/javascript" src="javascripts/filters/filters.js"></script>
-    <script type="text/javascript" src="javascripts/controllers/controllers.js"></script>
-    <script type="text/javascript" src="javascripts/directives/directives.js"></script>
-    <script type="text/javascript" src="javascripts/app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.js" integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
-    <script>
-      $(document).ready(function() {
-          $("[href]").each(function() {
-              if (this.href == window.location.href) {
-                  $(this).addClass("active");
-              }
-          });
-      });
-    </script>
-  </body>
-</html>

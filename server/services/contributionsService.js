@@ -38,7 +38,7 @@ exports.read = function (req, res, callback){
                 res.send(200, contribution);
             }
         }
-        else {
+        else { 
             console.log('error: contributionService.read - contribution does not exist');
             res.send(500, {error: 'error: contributionService.read - contribution does not exist'});
         }

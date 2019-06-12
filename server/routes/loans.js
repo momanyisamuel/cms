@@ -2,7 +2,7 @@ var db = require('../models'),
 loanService =  require('../services/loansService');
 
 exports.create = function (req, res){
-    if(!req.body.hasOwnProperty('loanAmount') || !req.body.hasOwnProperty('duration')){
+    if(!req.body.hasOwnProperty('loanAmount') || !req.body.hasOwnProperty('loanDuration')){
         console.log('Error 400: Post syntax incorrect.');
         res.send(400, 'Error 400: Post syntax incorrect.');
     }
