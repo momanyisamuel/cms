@@ -66,7 +66,12 @@
                                             <tr ng-repeat="choice in poll.choices">
                                                 <td>{{choice.text}}</td>
                                                 <td style="width: {{choice.votes.length/poll.totalVotes*100}}%;">
-                                                    {{choice.votes.length}}
+                                                    
+                                                    <div class="progress">
+                                                        <p class="progress-bar" role="progressbar" aria-valuenow="{{choice.votes.length*10}}" aria-valuemin="0" aria-valuemax="100" style="width: {{choice.votes.length*10}}%;">
+                                                            {{choice.votes.length}}
+                                                        </p>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
