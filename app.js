@@ -9,6 +9,14 @@ socket = require('./server/routes/socket');
 var passport = require('passport');
 
 app.configure(function(){
+    // let port = process.env.PORT;
+    //     if (port == null || port == "") {
+    //         port = 8000;
+    //         console.log(port)
+
+    //     }
+    // app.set(port);
+    
     app.set('port', process.env.PORT || 8000);
     app.use(logfmt.requestLogger());
     app.set('views', path.join(__dirname, '/client/views'));
