@@ -430,14 +430,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
         console.log($scope.votes)
     }).catch(err=>console.log(err))
 
-// Controller for an individual poll
-.controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http','socket','Poll' , function ($scope, $routeParams, $http, socket, Poll) {	
-    var user = JSON.parse(localStorage.getItem('currentUser'))
-    $scope.user = user
-
-
-
-    // Define an empty poll model object
+        // Define an empty poll model object
 	$scope.poll = {
 		question: '',
 		choices: [ { text: '' }, { text: '' }]
@@ -487,8 +480,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
                 } else {
                     alert('You must enter a question');
                 }
-            };
-
+    };
 }])
 
 .controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
