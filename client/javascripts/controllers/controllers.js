@@ -155,7 +155,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
     
     var user = JSON.parse(localStorage.getItem('currentUser'))
     $scope.user = user
-    console.log(user.id)
+    console.log(user.ChamaId)
     var contributionForm = function(){
         var url = 'http://localhost:8000/api/contribution'
 
@@ -165,13 +165,15 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
             contributionAmount: $scope.contributionAmount,
             fundAssignment: $scope.fundAssignment,
             comment: $scope.comment,
-            UserId: user.id
+            UserId: user.id,
+            ChamaId:user.ChamaId
             },
             {
                 headers: { 'Content-Type': 'application/json; charset=UTF-8'
             }
         }).then(function(response) { 
-            console.log(response) 
+            console.log(response.data) 
+            
             window.location.href = "http://localhost:8000/#/members"
         }).catch(err => console.log(err))
     }
@@ -346,6 +348,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
   
     var user = JSON.parse(localStorage.getItem('currentUser'))
     $scope.user = user
+    $scope.members = []
     $scope.sendInvite = function() {
         var url = 'http://localhost:8000/invite/user/'+user.ChamaId
         $http.post(url, {
@@ -373,6 +376,26 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
     }
     // var form = document.getElementById('inviteForm')
     // form.addEventListener("submit", $scope.sendInvite)
+    $http.get('http://localhost:8000/api/user').then(response => {
+        console.log(response.data)
+        let member = response.data
+        Object.keys(member).forEach(function(key){
+            
+            console.log(member[key].email)
+            let email = member[key].email
+            let chama = member[key].chama
+            
+            if(user.ChamaId === chama.id){
+                $scope.members.push({email:email,chama:chama.name,ChamaId:chama.id})
+            }
+        })
+        console.log($scope.members)
+        
+    }).catch(err=>console.log(err))
+
+    var user = JSON.parse(localStorage.getItem('currentUser'))
+
+    
     
 }])
 
@@ -408,7 +431,42 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
 
 .controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
     var user = JSON.parse(localStorage.getItem('currentUser'))
-    $scope.user = user
+    let contributionTotals = []
+    $http.get('http://localhost:8000/api/chama').then(response => {
+        console.log(response.data)
+        // if(user.ChamaId === ){
+
+        // }
+        let contribute = response.data
+        Object.keys(contribute).forEach(function(key){
+            
+            console.log(contribute[key].contributions)
+            // let email = member[key].email
+            let amount = contribute[key].contributions
+            for(let i=0;i<amount.length; i++){
+                console.log(amount[i].contributionAmount)
+                if(user.ChamaId === amount[i].ChamaId){
+                    contributionTotals.push(amount[i].contributionAmount)
+                }
+            }
+            
+            // if(user.ChamaId === chama.id){
+            //     $scope.members.push({email:email,chama:chama.name,ChamaId:chama.id})
+            // }
+        })
+    
+        
+    }).catch(err=>console.log(err))
+    console.log(contributionTotals)
+    $scope.totals = getTotals(contributionTotals)
+    function getTotals(data){
+        var total = 0;
+        for(var i = 0 ; i < data.length; i++){
+          total = total + data[i]/1;
+        }
+        return total.toFixed(0)
+    }
+    
 }])
 
 .controller('votesCtrl', ['$scope', '$http','$location', function ($scope, $http, $location){
@@ -482,12 +540,6 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource'])
                 }
     };
 }])
-
-.controller('reportsCtrl', ['$scope', '$http', function ($scope, $http){
-    $scope.welcome = 'Welcome to the reports page';
-}])
-
-
 // Controller for an individual poll
 .controller ('PollItemCtrl' , ['$scope', '$routeParams' , '$http','$location', function ($scope, $routeParams, $http,$location) {	
    

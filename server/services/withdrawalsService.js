@@ -8,7 +8,8 @@ exports.create = function (req, res, callback){
         withdrawRefNumber: req.body.withdrawRefNumber,
         paymentPurpose: req.body.paymentPurpose,
         comment: req.body.comment,
-        UserId: req.body.UserId       
+        UserId: req.body.UserId,
+        ChamaId: req.body.ChamaId       
     })
     .success(function (withdrawal){
         if (callback){
