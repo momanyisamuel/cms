@@ -55,6 +55,8 @@ exports.readAll = function (req, res, callback){
             model:db.Withdrawals
         },{
             model:db.Portfolio
+        },{
+            model:db.Fines
         }]
     })
     .success(function (chamas){

@@ -7,7 +7,6 @@
             <!-- display if user is in a group  -->
             <li><a href="#/contribution">Contribution</a></li>
             <li><a href="#/withdrawals">Withdrawals</a></li>
-            <li><a href="#/loans">Loans</a></li>
             <li><a href="#/members">Members</a></li>
             <li><a href="#/fines">Fines</a></li>
             <li><a href="#/votes">Votes</a></li>
@@ -101,8 +100,10 @@
                                 <li role="presentation"class="active"><a href="#/reports"ng-click="showBoxOne = !showBoxOne">Assets</a></li>
                                 <li role="presentation"><a href="#/reports"ng-click="showBoxTwo = !showBoxTwo">Contributions</a></li>
                                 <li role="presentation"><a href="#/reports"ng-click="showBoxThree = !showBoxThree">Members</a></li>
+                                <li role="presentation"><a href="#/reports"ng-click="showBoxFour = !showBoxFour">Withdrawals</a></li>
+                                <li role="presentation"><a href="#/reports"ng-click="showBoxFive = !showBoxFive">Fines</a></li>
                             </ul>
-                            <div class="box-one row" ng-show="showBoxOne = true">
+                            <div class="box-one row" ng-show="showBoxOne">
                                 <div class="col-md-12">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
@@ -190,6 +191,67 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="box-one row" ng-show="showBoxFour">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Summary Withdrawal reports</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <table  class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Withdrawal Date</th>
+                                                        <th> Reference</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="withdrawal in withdrawals">
+                                                        <td>#</td>
+                                                        <td>{{withdrawal.withdrawalDate}}</td>
+                                                        <td>{{withdrawal.withdrawRefNumber}}</td>
+                                                        <td>{{withdrawal.withdrawalAmount}}</td>
+                                                        
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-one row" ng-show="showBoxFive">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title">Summary Fine reports</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <table  class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Fine Date</th>
+                                                        <th>User Email</th>
+                                                        <th>Amount</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="fine in fines">
+                                                        <td>#</td>
+                                                        <td>{{fine.fineDate}}</td>
+                                                        <td>{{fine.email}}</td>
+                                                        <td>{{fine.fineAmount}}</td>
+                                                        
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                     </div>
                 </div>
             </div>

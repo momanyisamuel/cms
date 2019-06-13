@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     Chama.hasMany(models.Poll)
     Chama.hasMany(models.Contributions)
     Chama.hasMany(models.Withdrawals)
+    Chama.hasMany(models.Fines)
   };
   return Chama;
 };

@@ -269,7 +269,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource','
         }).then(function(response) { 
             console.log(response.data) 
             
-            window.location.href = "http://localhost:8000/#/members"
+            window.location.href = "http://localhost:8000/#/contribution"
         }).catch(err => console.log(err))
     }
 
@@ -353,6 +353,10 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource','
     var user = JSON.parse(localStorage.getItem('currentUser'))
     $scope.user = user
 
+    $http.get('http://localhost:8000/api/fine').then(response=>{
+        $scope.fines = response.data
+    }).catch(err=>console.log(err))
+
     var fineMember = function(){
         var url = 'http://localhost:8000/api/fine'
 
@@ -360,14 +364,17 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource','
             fineDate: $scope.fineDate,
             fineCategory: $scope.fineCategory,
             fineAmount: $scope.fineAmount,
-            comment: $scope.comment
+            comment: $scope.comment,
+            UserId: user.UserId,
+            ChamaId: user.ChamaId,
+            email: user.email
             },
             {
                 headers: { 'Content-Type': 'application/json; charset=UTF-8'
             }
         }).then(function(response) { 
             console.log(response) 
-            $location.url('/members')
+            $location.url('/fines')
         }).catch(err => console.log(err))
     }
 
@@ -393,7 +400,7 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource','
             }
         }).then(function(response) { 
             console.log(response) 
-            window.location.href = "http://localhost:8000/#/members"
+            window.location.href = "http://localhost:8000/#/loans"
         }).catch(err => console.log(err))
     }
 
@@ -569,7 +576,9 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource','
         var totalWithdrawn = 0
         Object.keys(withdraw).forEach(function(key){
             let withdrawalTotals = []
+            console.log(withdraw[key].withdrawals)
             let withdrew = withdraw[key].withdrawals
+            $scope.withdrawals = withdrew
             for(let i=0;i<withdrew.length; i++){
                 if(user.ChamaId === withdrew[i].ChamaId){
                     withdrawalTotals.push(withdrew[i].withdrawalAmount)
@@ -582,6 +591,28 @@ angular.module('app.controllers', ['socketService','pollService', 'ngResource','
         })
         // console.log(totalWithdrawn)
         $scope.withdrawTotal = totalWithdrawn
+    }).catch(err=>console.log(err))
+
+    $http.get('http://localhost:8000/api/chama').then(response => {
+        let fined = response.data
+        var totalFined = 0
+        Object.keys(fined).forEach(function(key){
+            let finedTotals = []
+            console.log(fined[key].fines)
+            let fine = fined[key].fines
+            $scope.fines = fine
+            for(let i=0;i<fine.length; i++){
+                if(user.ChamaId === fine[i].ChamaId){
+                    finedTotals.push(fine[i].fineAmount)
+                }
+            }
+            for(let j =0;j<finedTotals.length; j++){
+                // console.log(withdrawalTotals[j])
+                totalFined += finedTotals[j]
+            }
+        })
+        // console.log(totalWithdrawn)
+        $scope.finedTotal = totalFined
     }).catch(err=>console.log(err))
 
     // total assets or liabilities
