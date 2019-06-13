@@ -38,23 +38,23 @@
                                 <form id="contributionForm" ng-submit="contributionForm()">
                                     <div class="form-group">
                                         <label for="contributionDate">Date contributed:</label>
-                                        <input ng-model="contributionDate" type="text" class="form-control" id="depositDate" placeholder="dd/mm/yyyy"/>
+                                        <input  ng-model="contributionDate" type="text" required pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$" class="form-control" id="depositDate" placeholder="dd/mm/yyyy"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="payRefNumber">Payment Reference Number:</label>
-                                        <input ng-model="payRefNumber" type="text" class="form-control" id="payRefNumber" placeholder="MPESA REF"/>
+                                        <input ng-model="payRefNumber" type="text" required class="form-control" id="payRefNumber" placeholder="MPESA REF"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="contributionAmount">Amount contributed:</label>
-                                        <input ng-model="contributionAmount" type="text" class="form-control" id="depositAmount" placeholder="Amount"/>
+                                        <input ng-model="contributionAmount" type="text" required pattern="^[0-9]+(\.[0-9]{1,2})?$" class="form-control" id="depositAmount" placeholder="Amount"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="fundAssignment">Purpose of funds:</label>
-                                        <input ng-model="fundAssignment" type="text" class="form-control" id="fundAssignment" placeholder="contribution"/>
+                                        <input ng-model="fundAssignment" type="text" required class="form-control" id="fundAssignment" placeholder="contribution"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="comment">comment </label>
-                                        <input ng-model="comment" type="text" class="form-control" id="comment" placeholder="Comments"/>
+                                        <input ng-model="comment" type="text" required class="form-control" id="comment" placeholder="Comments"/>
                                     </div>                
                                     <button type="submit" class="btn btn-default">Submit</button>
                                 </form>

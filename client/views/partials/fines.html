@@ -38,19 +38,19 @@
                                 <form id="fineMember" ng-submit="fineMember()">
                                     <div class="form-group">
                                         <label for="Date of Fine"></label>
-                                        <input type="text" ng-model="fineDate" class="form-control" name="fineDate" placeholder="Date of Fine">
+                                        <input type="text" required ng-model="fineDate" class="form-control" name="fineDate" placeholder="Date of Fine">
                                     </div>
                                     <div class="form-group">
                                         <label for="Fine Category"></label>
-                                        <input type="text" value="" ng-model="fineCategory" class="form-control" name="fineCategory" placeholder="e.g. Late Contribution..">
+                                        <input type="text"  required value="" ng-model="fineCategory" class="form-control" name="fineCategory" placeholder="e.g. Late Contribution..">
                                     </div>
                                     <div class="form-group">
                                             <label for="Fine Amount"></label>
-                                            <input type="text" ng-model="fineAmount" class="form-control" name="fineAmount" placeholder="Fined Amount">
+                                            <input type="text" required  ng-model="fineAmount" required pattern="^[0-9]+(\.[0-9]{1,2})?$" class="form-control" name="fineAmount" placeholder="Fined Amount">
                                         </div>
                                     <div class="form-group">
                                                 <label for="Comment"></label>
-                                                <input type="text" ng-model="comment" class="form-control" name="comment" placeholder="comment">
+                                                <input type="text" required  ng-model="comment" class="form-control" name="comment" placeholder="comment">
                                             </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-default">Fine Member</button>
