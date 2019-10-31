@@ -19,7 +19,7 @@
         "mysql": "*",
         "passport": "^0.4.0",
         "passport-jwt": "^4.0.0",
-        "sequelize": "2.0.0-dev11",
+        "sequelize": "5.15.1",
         "socket.io": "*",
         "superagent": "*"
     },
