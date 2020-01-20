@@ -11,7 +11,7 @@
         "bcrypt": "^3.0.6",
         "ejs": "*",
         "expect.js": "*",
-        "express": "3.4.7",
+        "express": "3.11.0",
         "jsonwebtoken": "^8.5.1",
         "lodash": "*",
         "logfmt": "*",
